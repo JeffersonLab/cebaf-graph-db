@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text('config');
-            $table->text('config_md5');
+            $table->text('config_md5')->storedAs( 'MD5(config)');
             $table->text('comment')->nullable();
         });
     }

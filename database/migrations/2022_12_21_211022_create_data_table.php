@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,11 +16,13 @@ return new class extends Migration
     {
         Schema::create('data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('data_set_id')->constrained();
+            $table->foreignId('data_set_id')->constrained()->cascadeOnDelete();
             $table->timestamp('timestamp');
             $table->string('label')->nullable();
-            $table->string('graph_file');
         });
+
+        // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
+        DB::statement("ALTER TABLE data ADD graph MEDIUMBLOB");
     }
 
     /**

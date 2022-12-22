@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\LoadsFileException;
+
 /**
  *  Class to load a data set produced by ced2graph into the database.
  *
@@ -11,35 +13,37 @@ namespace App\Models;
  */
 class DataSetLoader
 {
-    /**
-     * The directory containing the data set.
-     * @var string
-     */
-    protected $path;
+    use LoadsFile;
 
     /**
      * Construct an instance.
      *
      * @param string $path
+     * @throws LoadsFileException
      */
     public function __construct(string $path){
         $this->path = $path;
         $this->assertPathIsReadable();
+        $this->assertPathHasFile($this->configFile());
+    }
+
+
+    /**
+     * Path to the config file.
+     */
+    public function configFile() : string{
+        return $this->path . DIRECTORY_SEPARATOR .config('ced2graph.config_file');
     }
 
     /**
-     * @param string $path
-     * @return void
-     * @throws \Exception
+     * @throws \Throwable
      */
-    protected function assertPathIsReadable(){
-        if (! (is_dir($this->path) && is_readable($this->path))){
-            throw new \Exception('Path to data set does not exist or is not readable.');
-        }
-    }
+    public function store(string $comment = null): DataSet{
+        $dataSet = new DataSet(['comment' => $comment]);
+        $dataSet->setAttribute('config', file_get_contents($this->configFile()));
+        $dataSet->saveOrFail();
 
-    protected function assertPathContainsConfigFile(){
-
+        return $dataSet->fresh();
     }
 
 }

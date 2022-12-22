@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\DataSetLoader;
 use Illuminate\Console\Command;
 
 class DataImport extends Command
@@ -27,6 +28,8 @@ class DataImport extends Command
      */
     public function handle()
     {
+        $loader = new DataSetLoader('./20221221_092324');
+        $this->line($loader->configFile());
         return Command::SUCCESS;
     }
 }
