@@ -41,13 +41,13 @@ class DataSetLoader
      *
      * @throws \Throwable
      */
-    public function store(string $comment = null): DataSet{
+    public function store(string $comment = null, $label=null): DataSet{
         $dataSet = new DataSet(['comment' => $comment]);
         $dataSet->setAttribute('config', file_get_contents($this->configFile()));
         DB::beginTransaction();
         try{
             $dataSet->saveOrFail();
-            $this->storeData($dataSet);
+            $this->storeData($dataSet, $label);
             DB::commit();
         }catch (\Exception $e){
             DB::rollBack();
@@ -71,10 +71,10 @@ class DataSetLoader
      * @throws LoadsFileException
      * @throws \Throwable
      */
-    public function storeData(DataSet $dataSet){
+    public function storeData(DataSet $dataSet, $label = null){
         foreach ( $this->dataDirs() as $path) {
             $loader = new DataLoader($path, $dataSet);
-            $loader->store();
+            $loader->store($label);
         }
     }
 }
