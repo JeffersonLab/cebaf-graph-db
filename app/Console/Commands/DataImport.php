@@ -28,8 +28,16 @@ class DataImport extends Command
      */
     public function handle()
     {
-        $loader = new DataSetLoader('./20221221_092324');
-        $this->line($loader->configFile());
+        try{
+            $loader = new DataSetLoader('./tests/data/20221221_092324');
+            $this->line($loader->configFile());
+            $dataSet = $loader->store();
+            $this->line('Saved data as number ' . $dataSet->id);
+        }catch (\Exception $e){
+            $this->error($e->getMessage());
+            return Command::FAILURE;
+        }
         return Command::SUCCESS;
+
     }
 }

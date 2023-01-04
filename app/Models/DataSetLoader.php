@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\LoadsFileException;
+use Illuminate\Support\Facades\DB;
 
 /**
  *  Class to load a data set produced by ced2graph into the database.
@@ -36,14 +37,44 @@ class DataSetLoader
     }
 
     /**
+     * store the data set and its data.
+     *
      * @throws \Throwable
      */
     public function store(string $comment = null): DataSet{
         $dataSet = new DataSet(['comment' => $comment]);
         $dataSet->setAttribute('config', file_get_contents($this->configFile()));
-        $dataSet->saveOrFail();
-
+        DB::beginTransaction();
+        try{
+            $dataSet->saveOrFail();
+            $this->storeData($dataSet);
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+            throw $e;
+        }
         return $dataSet->fresh();
     }
 
+    /**
+     * Get the list of data directories within the data set directory.
+     */
+    public function dataDirs(): array{
+        return glob($this->path . DIRECTORY_SEPARATOR . '*_*');  // expect yyyymmdd_hhiiss
+    }
+
+    /**
+     * Store the data that comprise the data set.
+     *
+     * @param DataSet $dataSet
+     * @return void
+     * @throws LoadsFileException
+     * @throws \Throwable
+     */
+    public function storeData(DataSet $dataSet){
+        foreach ( $this->dataDirs() as $path) {
+            $loader = new DataLoader($path, $dataSet);
+            $loader->store();
+        }
+    }
 }

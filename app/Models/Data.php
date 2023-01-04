@@ -15,5 +15,7 @@ class Data extends Model
 
     public $fillable = ['timestamp','data_set_id','label','graph'];
 
-
+    public function dataSet(){
+        return $this->belongsTo(DataSet::class);
+    }
 }

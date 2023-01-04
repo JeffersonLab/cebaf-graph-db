@@ -45,5 +45,6 @@ class DataSetLoaderTest extends TestCase
         $this->assertEquals('a comment', $ds->comment);
         $this->assertNotNull($ds->id);
         $this->assertEquals($ds->config_md5, md5(file_get_contents($loader->configFile())));
+        $this->assertCount(17, $ds->data);
     }
 }

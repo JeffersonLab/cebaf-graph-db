@@ -50,6 +50,7 @@ class DataLoaderTest extends TestCase
         $this->assertNotNull($data->id);
         $this->assertEquals('GOOD', $data->label);
         $this->assertEquals(md5($data->graph), md5(file_get_contents($loader->graphFile())));
+        $this->assertEquals($ds->id, $data->dataSet->id);
         // TODO timestamp assertion
     }
 

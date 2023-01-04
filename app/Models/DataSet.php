@@ -10,5 +10,8 @@ class DataSet extends Model
     use HasFactory;
     public $fillable = ['config','comment'];
 
+    public function data(){
+        return $this->hasMany(Data::class);
+    }
 
 }
