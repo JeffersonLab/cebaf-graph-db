@@ -1,0 +1,12 @@
+TYPE	NAME	LABELS
+0 	 Solenoid S,.BDL,.S
+1 	 WarmCavity S,GSET,PSET,Psum
+2 	 Corrector S,.BDL,.S
+3 	 IonPump S,Vacuum
+4 	 BPM S,WireSum,.XPOS,.YPOS
+5 	 Capture S,GSET,PSET
+6 	 Dipole S,.BDL,.S
+7 	 Quad S,.BDL,.S
+8 	 BeamLossMonitor S,Lc
+9 	 CryoCavity S,GSET,PSET,XPSET8
+10 	 BCM S,Current

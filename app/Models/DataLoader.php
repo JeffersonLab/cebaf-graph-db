@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Exceptions\LoadsFileException;
 use Carbon\Carbon;
 use Dflydev\DotAccessData\Exception\DataException;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 
 class DataLoader
@@ -34,16 +36,39 @@ class DataLoader
         return $this->path . DIRECTORY_SEPARATOR .config('ced2graph.graph_file');
     }
 
-
     /**
      * @throws \Throwable
      */
     public function store(string $label = null): Data{
-        $data = new Data(['data_set_id' => $this->dataSet->id, 'label' => $label]);
-        $data->setAttribute('timestamp', $this->timestampFromPath());
-        $data->setAttribute('graph', file_get_contents($this->graphFile()));
-        $data->saveOrFail();
-        return $data->fresh();
+        try{
+            $data = new Data(['data_set_id' => $this->dataSet->id, 'label' => $label]);
+            $data->setAttribute('timestamp', $this->timestampFromPath());
+            $data->setAttribute('graph', file_get_contents($this->graphFile()));
+            $data->saveOrFail();
+            return $data->fresh();
+        } catch (QueryException $e){
+            if ($e->getCode() == 23000){
+                throw new LoadsFileException("Data already exists at timestamp ".$this->timestampFromPath());
+            }
+        }
+    }
+
+
+    /**
+     * @throws \Throwable
+     */
+    public function replace(string $label = null): Data{
+        DB::beginTransaction();
+        try {
+            Data::where('data_set_id',$this->dataSet->id)
+                ->where('timestamp', $this->timestampFromPath())
+                ->delete();
+            DB::commit();
+            return $this->store($label);
+        }catch (\Exception $e){
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function timestampFromPath(){

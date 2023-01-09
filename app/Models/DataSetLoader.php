@@ -56,6 +56,8 @@ class DataSetLoader
         return $dataSet->fresh();
     }
 
+
+
     /**
      * Get the list of data directories within the data set directory.
      */
@@ -71,10 +73,27 @@ class DataSetLoader
      * @throws LoadsFileException
      * @throws \Throwable
      */
-    public function storeData(DataSet $dataSet, $label = null){
+    public function storeData(DataSet $dataSet, $label = null): void{
         foreach ( $this->dataDirs() as $path) {
             $loader = new DataLoader($path, $dataSet);
             $loader->store($label);
         }
     }
+
+    /**
+     * Store the data that comprise the data set.
+     *
+     * @param DataSet $dataSet
+     * @return void
+     * @throws LoadsFileException
+     * @throws \Throwable
+     */
+    public function replaceData(DataSet $dataSet, $label = null): void{
+        foreach ( $this->dataDirs() as $path) {
+            $loader = new DataLoader($path, $dataSet);
+            $loader->replace($label);
+        }
+    }
+
+
 }

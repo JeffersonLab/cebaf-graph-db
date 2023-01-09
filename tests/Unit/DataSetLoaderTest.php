@@ -14,11 +14,13 @@ class DataSetLoaderTest extends TestCase
 
     protected string $dataDir;
 
+    protected string $extraData;
+
     public function setUp(): void
     {
         parent::setUp();
         $this->dataDir = __DIR__.'/../data/20221221_092324';
-
+        $this->extraData = __DIR__.'/../data/20230109_104207';
     }
 
     public function test_config_file_name()
@@ -38,7 +40,7 @@ class DataSetLoaderTest extends TestCase
         $loader = new DataSetLoader($this->dataDir);
     }
 
-    public function test_store(){
+    public function test_store_and_append_and_replace(){
         Config::set('ced2graph.config_file','config.yaml');
         $loader = new DataSetLoader($this->dataDir);
         $ds = $loader->store('a comment','a label');
@@ -47,5 +49,25 @@ class DataSetLoaderTest extends TestCase
         $this->assertEquals($ds->config_md5, md5(file_get_contents($loader->configFile())));
         $this->assertCount(17, $ds->data);
         $this->assertEquals('a label', $ds->data->first()->label);
+
+        // Append additional data
+        $loader = new DataSetLoader($this->extraData);
+        $loader->storeData($ds,'a label');
+        $ds->load('data');      // refetch the collection from database
+        $this->assertCount(25, $ds->data);
+        $this->assertEquals('a label', $ds->data->last()->label);
+
+        // Replace appended data
+        $loader = new DataSetLoader($this->extraData);
+        // An exeption if we try to store same data again
+        $this->expectException(LoadsFileException::class);
+        $loader->storeData($ds,'foo label');
+
+        // But we should be able to explicitly replace it
+        $loader->replaceData($ds,'foo label');
+        $ds->load('data');      // refetch the collection from database
+        $this->assertCount(25, $ds->data);
+        $this->assertEquals('foo label', $ds->data->last()->label);
+
     }
 }

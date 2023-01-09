@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('data_set_id')->constrained()->cascadeOnDelete();
             $table->timestamp('timestamp');
             $table->string('label')->nullable();
+
+            $table->unique(['data_set_id','timestamp']);
         });
 
         // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB

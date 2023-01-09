@@ -2,19 +2,21 @@
 
 namespace App\Console\Commands;
 
+use App\Models\DataSet;
 use App\Models\DataSetLoader;
 use Illuminate\Console\Command;
 
-class DataImport extends Command
+class GraphDataAppend extends Command
 {
     /**
      * The name and signature of the console command.
-     * TODO option to append to existing data set id
+     *
      * @var string
      */
-    protected $signature = 'data:import
+    protected $signature = 'graph-data:append
+                            {id         : id number of data being appended}
                             {directory  : directory of ced2graph output}
-                            {--comment= : comment to annotate the data set}
+                            {--replace  : replace existing data at conflicting timestamps}
                             {--label=   : label to apply to data set items}';
 
     /**
@@ -22,7 +24,7 @@ class DataImport extends Command
      *
      * @var string
      */
-    protected $description = 'Import a set of graph data into the database';
+    protected $description = 'Append new graph data to an existing data set';
 
     /**
      * Execute the console command.
@@ -33,13 +35,21 @@ class DataImport extends Command
     {
         try{
             $loader = new DataSetLoader( $this->argument('directory'));
-            $this->line($loader->configFile());
-            $dataSet = $loader->store($this->option('comment'), $this->option('label'));
-            $this->line('Saved data as number ' . $dataSet->id);
+            $dataSet = DataSet::findOrFail($this->argument('id'));
+            if ($this->option('replace')){
+                $loader->replaceData($dataSet,  $this->option('label'));
+            }else{
+                $loader->storeData($dataSet,  $this->option('label'));
+            }
+
         }catch (\Exception $e){
             $this->error($e->getMessage());
             return Command::FAILURE;
         }
         return Command::SUCCESS;
+    }
+
+    protected function dataDirs($path): array{
+        return glob($path . DIRECTORY_SEPARATOR . '*_*');  // expect yyyymmdd_hhiiss
     }
 }
