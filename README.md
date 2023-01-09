@@ -11,7 +11,18 @@ retrieving them.
 ## Import data to create DataSet
 
 ```shell
-artisan data:import  ./tests/data/20221221_092324
+artisan graph-data:import  ./tests/data/20221221_092324 --comment="First Data Set"
+```
+
+## List data sets
+```shell
+ cebaf-graph-db % sail artisan graph-data:list-sets
++----+-----------------------------+-----------------+
+| ID | Created                     | Comment         |
++----+-----------------------------+-----------------+
+| 1  | 2023-01-09T19:24:10.000000Z | First data set  |
+| 2  | 2023-01-09T19:24:18.000000Z | Second data set |
++----+-----------------------------+-----------------+
 ```
 
 ## Append data to an existing DataSet
@@ -28,3 +39,5 @@ artisan data:import  ./tests/data/20221221_092324
  # Add --replace to prevent an error if timestamp already occupied
  artisan graph-data:append 2 ./tests/data/20230109_104207 --label=bar --replace
 ```
+
+
