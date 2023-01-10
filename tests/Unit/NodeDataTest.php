@@ -4,14 +4,16 @@ namespace Tests\Unit;
 
 use App\Exceptions\NodeDataException;
 use App\Utilities\NodeData;
-use PhpParser\Node;
-use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Facades\Config;
+use Tests\TestCase;
 
 class NodeDataTest extends TestCase
 {
     protected function setUp():void
     {
         parent::setUp();
+        Config::set('ced2graph.node_file','node.dat');
+        Config::set('ced2graph.type_file','info.dat');
         $this->nodeData = new NodeData(__DIR__ . '/../data/20230110_103241/20210913_000000');
     }
 

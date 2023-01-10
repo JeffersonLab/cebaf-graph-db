@@ -13,7 +13,7 @@ class Data extends Model
 
     public $dates = ['timestamp'];
 
-    public $fillable = ['timestamp','data_set_id','label','graph'];
+    public $fillable = ['timestamp','data_set_id','label','graph','globals'];
 
     protected $casts = [
         'globals' => 'array'

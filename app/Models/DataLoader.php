@@ -28,6 +28,7 @@ class DataLoader
 
         $this->assertPathIsReadable();
         $this->assertPathHasFile($this->graphFile());
+        $this->assertPathHasFile($this->globalsFile());
     }
 
     /**
@@ -38,6 +39,14 @@ class DataLoader
     }
 
     /**
+     * Path to the config file.
+     */
+    public function globalsFile() : string{
+        return $this->path . DIRECTORY_SEPARATOR .config('ced2graph.globals_file');
+    }
+
+
+    /**
      * @throws \Throwable
      */
     public function store(string $label = null): Data{
@@ -45,6 +54,7 @@ class DataLoader
             $data = new Data(['data_set_id' => $this->dataSet->id, 'label' => $label]);
             $data->setAttribute('timestamp', $this->timestampFromPath());
             $data->setAttribute('graph', file_get_contents($this->graphFile()));
+            $data->setAttribute('globals', json_decode(file_get_contents($this->globalsFile())));
             $data->saveOrFail();
             return $data->fresh();
         } catch (QueryException $e){

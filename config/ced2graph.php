@@ -21,4 +21,33 @@ return [
     */
     'graph_file' => 'graph.pkl',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Globals File Name
+    |--------------------------------------------------------------------------
+    |
+    | The name of the file containing globals data output from ced2graph.
+    |
+    */
+    'globals_file' => 'globals.json',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Nodes File Name
+    |--------------------------------------------------------------------------
+    |
+    | The name of the file containing nodes data output from ced2graph.
+    |
+    */
+    'node_file' => 'node.dat',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Type Info File Name
+    |--------------------------------------------------------------------------
+    |
+    | The name of the file containing type info output from ced2graph.
+    |
+    */
+    'type_file' => 'info.dat',
 ];

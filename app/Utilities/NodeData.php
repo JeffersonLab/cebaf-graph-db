@@ -5,7 +5,6 @@ namespace App\Utilities;
 use App\Exceptions\LoadsFileException;
 use App\Exceptions\NodeDataException;
 use App\Traits\LoadsFile;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -46,7 +45,7 @@ class NodeData
      */
     protected function typeDataFile()
     {
-        return $this->path . DIRECTORY_SEPARATOR . 'info.dat';
+        return $this->path . DIRECTORY_SEPARATOR . config('ced2graph.type_file');
     }
 
     /**
@@ -56,7 +55,7 @@ class NodeData
      */
     protected function nodeDataFile()
     {
-        return $this->path . DIRECTORY_SEPARATOR . 'node.dat';
+        return $this->path . DIRECTORY_SEPARATOR . config('ced2graph.node_file');
     }
 
     /**
