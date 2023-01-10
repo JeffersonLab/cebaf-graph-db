@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('data_set_id')->constrained()->cascadeOnDelete();
             $table->timestamp('timestamp');
             $table->string('label')->nullable();
-
+            $table->json('globals')->nullable();
             $table->unique(['data_set_id','timestamp']);
         });
 

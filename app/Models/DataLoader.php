@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\LoadsFileException;
+use App\Traits\LoadsFile;
 use Carbon\Carbon;
 use Dflydev\DotAccessData\Exception\DataException;
 use Illuminate\Database\QueryException;
