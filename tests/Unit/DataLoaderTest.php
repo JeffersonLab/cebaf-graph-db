@@ -18,7 +18,7 @@ class DataLoaderTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->dataDir = __DIR__.'/../data/20221221_092324/20210910_000000';
+        $this->dataDir = __DIR__.'/../data/20230110_103241/20210910_000000';
 
     }
 
