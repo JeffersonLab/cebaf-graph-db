@@ -12,6 +12,35 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+import Vue from 'vue'
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+
+import { createInertiaApp } from '@inertiajs/vue2'
+
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+        console.log(pages);
+        return pages[`./Pages/${name}.vue`]
+    },
+
+    setup({ el, App, props, plugin }) {
+        Vue.use(plugin)
+
+        new Vue({
+            render: h => h(App, props),
+        }).$mount(el)
+    },
+})
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
