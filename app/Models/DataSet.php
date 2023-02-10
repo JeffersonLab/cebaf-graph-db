@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataSet extends Model
 {
+    //TODO create a zip file containing data items
     use HasFactory;
     public $fillable = ['config','comment'];
 

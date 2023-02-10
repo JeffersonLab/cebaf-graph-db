@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDataSetRequest;
 use App\Http\Requests\UpdateDataSetRequest;
+use App\Http\Resources\DataResource;
+use App\Http\Resources\DataSetCollection;
 use App\Http\Resources\DataSetResource;
 use App\Models\Data;
 use App\Models\DataSet;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class DataSetController extends Controller
@@ -14,11 +17,15 @@ class DataSetController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $items = new DataSetCollection(DataSet::all());
+        return Inertia::render('DataSet/Index', [
+            'dataSets' =>  $items->toArray($request),
+        ]);
     }
 
     /**

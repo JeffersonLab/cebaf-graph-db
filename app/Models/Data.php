@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Data extends Model
 {
+    //TODO save graph and globals to correctly named files
     use HasFactory;
 
     public $timestamps = false;

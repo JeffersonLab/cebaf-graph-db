@@ -9,9 +9,17 @@
                 <pre><code class="language-yaml">{{ configFile }}</code></pre>
             </div>
         </div>
+        <h3>Models</h3>
+        <div class="row">
+            <div class="col">
+                <p>The table below lists models trained on the current data set</p>
+                <b-table :items="[]"></b-table>
+            </div>
+        </div>
         <h3>Data</h3>
         <div class="row">
             <div class="col">
+                <p>The table below lists the graph data that comprise the data set.</p>
                 <b-table :items="dataSet.data"></b-table>
             </div>
         </div>
@@ -46,6 +54,9 @@ pre {
     width:100%;
     resize: both;
     overflow: auto;
+}
+h3 {
+    border-top: 1px solid;
 }
 </style>
 
