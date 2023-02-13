@@ -14,17 +14,27 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Vue from 'vue'
 
+/**
+ * We import ziggy in order to have ready access to server side routes within our VUE components.
+ */
+import { ZiggyVue } from 'ziggy';
+import { Ziggy } from './ziggy';
+Vue.use(ZiggyVue, Ziggy);
+
+/**
+ * We import the Vue Bootstrap component library for building GUI
+ */
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-// Import Bootstrap and BootstrapVue CSS files (order is important)
+// The import order of the two css files is important!
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-// Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+Vue.use(IconsPlugin)    // comment out if not desired
 
+/**
+ * Inertiajs gives us SPA-like behavior but with server-side routing and controllers.
+ */
 import { createInertiaApp } from '@inertiajs/vue2'
-
 createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })

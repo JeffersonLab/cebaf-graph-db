@@ -1,16 +1,7 @@
 <template>
-    <body class="container">
-    <header>
-        <div class="row strapline">
-<!--            <Link href="/">Home</Link>-->
-<!--            <Link href="/about">About</Link>-->
-<!--            <Link href="/contact">Contact</Link>-->
-        </div>
-    </header>
     <main>
         <slot/>
     </main>
-    </body>
 </template>
 
 <script>

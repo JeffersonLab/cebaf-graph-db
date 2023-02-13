@@ -7,6 +7,15 @@
 @inertiaHead
 </head>
 <body>
+<div class="container">
+<div class="row strapline">
+    @include('includes.strapline')
+</div>
+<div class="row menubar">
+    @include('includes.navbar')
+</div>
+@routes
 @inertia
+</div>
 </body>
 </html>
