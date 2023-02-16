@@ -44,7 +44,7 @@ class DataSetTest extends TestCase
         Storage::fake('public');
         $writtenZip = $set->makePublicZipFile();
         $this->assertTrue(file_exists($writtenZip));
-        $this->assertEquals($writtenZip, $set->publicZipFile());
+        $this->assertEquals($writtenZip, Storage::path('public') . DIRECTORY_SEPARATOR .$set->publicZipFile());
 
     }
 }

@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::resource('data-sets', DataSetController::class);
+
+Route::get('data-sets/{data_set}/zip', [DataSetController::class, 'zip'])->name('data-sets.zip');

@@ -10,6 +10,7 @@ use App\Http\Resources\DataSetResource;
 use App\Models\Data;
 use App\Models\DataSet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class DataSetController extends Controller
@@ -95,5 +96,17 @@ class DataSetController extends Controller
     public function destroy(DataSet $dataSet)
     {
         //
+    }
+
+    public function zip(DataSet $dataSet){
+        try{
+            if (! Storage::exists('public/'.$dataSet->publicZipFile())){
+                $dataSet->makePublicZipFile();
+//                sleep(1);  // time to flush to disk?
+            }
+            return Storage::download('public/'.$dataSet->publicZipFile());
+        }catch (\Exception $e){
+            abort(404, $e->getMessage());
+        }
     }
 }

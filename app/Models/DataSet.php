@@ -44,7 +44,7 @@ class DataSet extends Model
 
     public function publicZipFile(): string
     {
-        return Storage::path('public') . DIRECTORY_SEPARATOR . "data-set-{$this->id}.zip";
+        return "data-set-{$this->id}.zip";
     }
 
     /**
@@ -76,7 +76,6 @@ class DataSet extends Model
     public function makeZipFileFromCollection(string $file, Collection $data): string
     {
         $zipArchive = new ZipArchive();
-        var_dump($file);
         if ($zipArchive->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
             throw new StorageException("Unable to write zip file.  Verify path and file permissions are correct.\n");
         }
@@ -96,7 +95,8 @@ class DataSet extends Model
      */
     public function makePublicZipFile(): string
     {
-        return $this->makeZipFileFromCollection($this->publicZipFile(), $this->data()->get());
+        $file =  Storage::path('public') . DIRECTORY_SEPARATOR .$this->publicZipFile();
+        return $this->makeZipFileFromCollection($file, $this->data()->get());
     }
 
     public function exportPath(): string
