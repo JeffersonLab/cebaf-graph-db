@@ -18,7 +18,7 @@ class DataSetCollection extends ResourceCollection
             return [
               'id' => $item->id,
               'comment' => $item->comment,
-              'graphCount' => $item->data->count(),
+              'graphCount' => $item->data()->count(),
             ];
         });
     }
