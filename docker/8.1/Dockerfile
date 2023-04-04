@@ -65,8 +65,8 @@ RUN export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/JLabCA.crt \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# TODO Is there some way to avoid having _21_6 in the instantclient path?
-# As of 12/21 it's become 21_8
+# TODO Is there some way to avoid having _21_9 in the instantclient path?
+# As of 12/21 it's become 21_9
 RUN echo "Options = UnsafeLegacyRenegotiation" >> /etc/ssl/openssl.cnf \
     && mkdir /opt/oracle && cd /opt/oracle \
     && curl -sS -O https://download.oracle.com/otn_software/linux/instantclient/instantclient-basic-linuxx64.zip \
@@ -75,14 +75,14 @@ RUN echo "Options = UnsafeLegacyRenegotiation" >> /etc/ssl/openssl.cnf \
     && unzip instantclient-basic-linuxx64.zip && unzip instantclient-sqlplus-linuxx64.zip && unzip instantclient-sdk-linuxx64.zip \
     && rm instantclient-basic-linuxx64.zip instantclient-sqlplus-linuxx64.zip instantclient-sdk-linuxx64.zip \
     && apt-get update && apt-get install -y libaio1 \
-    && sh -c "echo /opt/oracle/instantclient_21_8 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
+    && sh -c "echo /opt/oracle/instantclient_21_9 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
     && ldconfig
 
 # Enable legacy content renegotation
 RUN cd /var/tmp \
     && curl -sS -O https://pecl.php.net/get/oci8-3.2.1.tgz \
     && tar xf oci8-3.2.1.tgz && cd oci8-3.2.1 \
-    && phpize && ./configure --with-oci8=instantclient,/opt/oracle/instantclient_21_8 \
+    && phpize && ./configure --with-oci8=instantclient,/opt/oracle/instantclient_21_9 \
     && make && make install \
     && echo "extension=oci8.so" > /etc/php/8.1/cli/conf.d/20-oci8.ini
 
@@ -92,7 +92,7 @@ RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
 RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail \
-    && echo "export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/JLabCA.crt" >> /home/sail/.bashrc
+    && (echo "export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/JLabCA.crt" >> /home/sail/.bashrc)
 
 
 
