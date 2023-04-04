@@ -23,7 +23,7 @@ class DataSetController extends Controller
     public function index(Request $request)
     {
 
-        $items = new DataSetCollection(DataSet::all());
+        $items = new DataSetCollection(DataSet::cursor());
         return Inertia::render('DataSet/Index', [
             'dataSets' =>  $items->toArray($request),
         ]);
