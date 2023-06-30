@@ -6,7 +6,7 @@ retrieving them.
 
 # Schema 
 
-![schema diagram](https://github.com/JeffersonLab/cebaf-graph-db/main/schema.jpg?raw=true)
+![schema diagram](schema.jpg)
 
 # Command Line Usage
 
