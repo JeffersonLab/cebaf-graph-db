@@ -16,9 +16,14 @@ return new class extends Migration
         Schema::create('data_sets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->text('config');
-            $table->text('config_md5')->storedAs( 'MD5(config)');
-            $table->text('comment')->nullable();
+            $table->foreignId('config_id')->constrained();
+            $table->string('purpose',20);
+            $table->string('label',20)->nullable();
+            $table->timestamp('begin_at');
+            $table->timestamp('end_at')->nullable();
+            $table->string('interval',20)->default('1h');
+            $table->string('status')->default('NEW');
+            $table->text('comments');
         });
     }
 

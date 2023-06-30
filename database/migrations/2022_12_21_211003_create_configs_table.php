@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('models', function (Blueprint $table) {
+        Schema::create('configs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('type',20);
-            $table->boolean('classifies')->default(false);
-            $table->text('comments');
+            $table->text('yaml');
+            $table->text('comments')->nullable();
         });
-
-        // once the table is created use a raw query to ALTER it and add the LONGBLOB
-        DB::statement("ALTER TABLE models ADD code LONGBLOB");
     }
 
     /**
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('models');
+        Schema::dropIfExists('configs');
     }
 };
