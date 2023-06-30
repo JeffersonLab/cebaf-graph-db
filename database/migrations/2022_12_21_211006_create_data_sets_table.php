@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('config_id')->constrained();
-            $table->string('purpose',20);
             $table->string('label',20)->nullable();
             $table->timestamp('begin_at');
             $table->timestamp('end_at')->nullable();
-            $table->string('interval',20)->default('1h');
-            $table->string('status')->default('NEW');
+            $table->string('interval',20);
+            $table->string('mya_deployment',20);
+            $table->string('status');
             $table->text('comments');
         });
     }

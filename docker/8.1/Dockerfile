@@ -41,7 +41,7 @@ RUN export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/JLabCA.crt \
     && echo "deb [signed-by=/usr/share/keyrings/ppa_ondrej_php.gpg] https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
     && apt-get update \
     && apt-get install -y php8.1-cli php8.1-dev \
-       php8.1-pgsql php8.1-sqlite3 php8.1-gd \
+       php8.1-pgsql php8.1-sqlite3 php8.1-gd php8.1-yaml\
        php8.1-curl \
        php8.1-imap php8.1-mysql php8.1-mbstring \
        php8.1-xml php8.1-zip php8.1-bcmath php8.1-soap \
@@ -65,8 +65,8 @@ RUN export NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/JLabCA.crt \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# TODO Is there some way to avoid having _21_9 in the instantclient path?
-# As of 12/21 it's become 21_9
+# TODO Is there some way to avoid having _21_10 in the instantclient path?
+# As of 12/21 it's become 21_10
 RUN echo "Options = UnsafeLegacyRenegotiation" >> /etc/ssl/openssl.cnf \
     && mkdir /opt/oracle && cd /opt/oracle \
     && curl -sS -O https://download.oracle.com/otn_software/linux/instantclient/instantclient-basic-linuxx64.zip \
@@ -75,14 +75,14 @@ RUN echo "Options = UnsafeLegacyRenegotiation" >> /etc/ssl/openssl.cnf \
     && unzip instantclient-basic-linuxx64.zip && unzip instantclient-sqlplus-linuxx64.zip && unzip instantclient-sdk-linuxx64.zip \
     && rm instantclient-basic-linuxx64.zip instantclient-sqlplus-linuxx64.zip instantclient-sdk-linuxx64.zip \
     && apt-get update && apt-get install -y libaio1 \
-    && sh -c "echo /opt/oracle/instantclient_21_9 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
+    && sh -c "echo /opt/oracle/instantclient_21_10 > /etc/ld.so.conf.d/oracle-instantclient.conf" \
     && ldconfig
 
 # Enable legacy content renegotation
 RUN cd /var/tmp \
     && curl -sS -O https://pecl.php.net/get/oci8-3.2.1.tgz \
     && tar xf oci8-3.2.1.tgz && cd oci8-3.2.1 \
-    && phpize && ./configure --with-oci8=instantclient,/opt/oracle/instantclient_21_9 \
+    && phpize && ./configure --with-oci8=instantclient,/opt/oracle/instantclient_21_10 \
     && make && make install \
     && echo "extension=oci8.so" > /etc/php/8.1/cli/conf.d/20-oci8.ini
 

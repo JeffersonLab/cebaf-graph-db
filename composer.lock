@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26968e8757bc9c64ef735c11cf103f78",
+    "content-hash": "4494eca11d58581334b50b4817e3ac85",
     "packages": [
         {
             "name": "brick/math",
@@ -1045,6 +1045,60 @@
                 }
             ],
             "time": "2023-01-17T01:02:51+00:00"
+        },
+        {
+            "name": "jlab/laravel-utilities",
+            "version": "9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JeffersonLab/laravel-utilities.git",
+                "reference": "d8439e228b6362591cbb795f763ced0efcd9c20c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JeffersonLab/laravel-utilities/zipball/d8439e228b6362591cbb795f763ced0efcd9c20c",
+                "reference": "d8439e228b6362591cbb795f763ced0efcd9c20c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0",
+                "php": "^8.0.2"
+            },
+            "require-dev": {
+                "laravel/tinker": "^2.0",
+                "orchestra/testbench": "^7.0",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jlab\\LaravelUtilities\\PackageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jlab\\LaravelUtilities\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Theo Larrieu",
+                    "email": "theo@jlab.org"
+                }
+            ],
+            "description": "Package of reusable utilities for laravel applications used at JLab",
+            "support": {
+                "source": "https://github.com/JeffersonLab/laravel-utilities/tree/9.0",
+                "issues": "https://github.com/JeffersonLab/laravel-utilities/issues"
+            },
+            "time": "2023-02-01T13:24:52+00:00"
         },
         {
             "name": "laravel/framework",
