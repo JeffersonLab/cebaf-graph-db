@@ -5,21 +5,45 @@ namespace App\Models;
 use App\Exceptions\DataExportException;
 use App\Exceptions\StorageException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Jlab\LaravelUtilities\BaseModel;
 use ZipArchive;
 
-class DataSet extends Model
+class DataSet extends BaseModel
 {
     //TODO create a zip file containing data items
     use HasFactory;
 
-    public $fillable = ['config', 'comment'];
+    public $guarded = ['id'];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'status' => 'NEW',
+        'interval' => '1h',
+        'mya_deployment' => 'history'
+    ];
+
+    public static $rules = [
+        'status' => 'required | inConfig:settings.data_set_statuses',
+        'mya_deployment' => 'required | inConfig:settings.mya_deployments',
+        'begin_at' => 'required | date',
+        'ends_at'  => 'nullable | date',
+        'comments' => 'required',
+    ];
 
     public function data()
     {
         return $this->hasMany(Data::class);
+    }
+
+    public function config()
+    {
+        return $this->BelongsTo(Config::class);
     }
 
     public function exportToStorage($path = null): void

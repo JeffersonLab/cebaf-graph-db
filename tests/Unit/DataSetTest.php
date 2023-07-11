@@ -2,13 +2,27 @@
 
 namespace Tests\Unit;
 
+use App\Models\Config;
 use App\Models\Data;
 use App\Models\DataSet;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class DataSetTest extends TestCase
 {
+    use DatabaseTransactions;
+    /**
+     * A basic unit test example.
+     *
+     * @return void
+     */
+    public function test_its_factory_produces_valid_model()
+    {
+        $dataSet = DataSet::factory()->make();
+        $dataSet->validate();
+        $this->assertTrue($dataSet->save());
+    }
 
     public function test_it_exports_to_disk_and_cleans_up(){
         $set = DataSet::factory()->create();

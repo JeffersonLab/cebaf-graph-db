@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Config;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class DataSetFactory extends Factory
     public function definition()
     {
         return [
-            'config' => $this->faker->text()
+            'config_id' => Config::factory(),
+            'begin_at' => $this->faker->dateTime(),
+            'mya_deployment' => 'history',
+            'comments' => $this->faker->text(),
+
         ];
     }
 }

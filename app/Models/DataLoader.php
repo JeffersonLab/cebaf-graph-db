@@ -61,6 +61,7 @@ class DataLoader
             if ($e->getCode() == 23000){
                 throw new LoadsFileException("Data already exists at timestamp ".$this->timestampFromPath());
             }
+            throw $e;
         }
     }
 

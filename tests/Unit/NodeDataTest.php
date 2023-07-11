@@ -4,11 +4,14 @@ namespace Tests\Unit;
 
 use App\Exceptions\NodeDataException;
 use App\Utilities\NodeData;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class NodeDataTest extends TestCase
 {
+    use DatabaseTransactions;
+
     protected function setUp():void
     {
         parent::setUp();

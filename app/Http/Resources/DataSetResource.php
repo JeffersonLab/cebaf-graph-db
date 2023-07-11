@@ -17,6 +17,7 @@ class DataSetResource extends BaseResource
     {
         $resourceData = parent::toArray($request);
         $resourceData['data'] = DataResource::collection($this->resource->data)->toArray($request);
+        $resourceData['config'] = $this->resource->config->yaml;
         return $resourceData;
     }
 }

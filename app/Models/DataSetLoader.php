@@ -43,12 +43,16 @@ class DataSetLoader
      * @throws \Throwable
      */
     public function store(string $comment = null, $label=null): DataSet{
-        $dataSet = new DataSet(['comment' => $comment]);
-        $dataSet->setAttribute('config', file_get_contents($this->configFile()));
+        $dataSet = new DataSet(['comments' => $comment, 'begin_at'=>'2021-09-05']);
+        $dataSet->config()->associate(Config::create(['yaml' => file_get_contents($this->configFile())]));
         DB::beginTransaction();
         try{
-            $dataSet->saveOrFail();
-            $this->storeData($dataSet, $label);
+            if ($dataSet->save()){
+                $this->storeData($dataSet, $label);
+            }else{
+                dd($dataSet->errors());
+            }
+
             DB::commit();
         }catch (\Exception $e){
             DB::rollBack();

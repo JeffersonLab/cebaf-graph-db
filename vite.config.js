@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue2';
 import path from 'path';
+import { run } from 'vite-plugin-run';
 
 export default defineConfig({
     resolve: {
@@ -22,5 +23,12 @@ export default defineConfig({
                 },
             },
         }),
+        run([
+            {
+                name: 'build ziggy routes',
+                run: ['php', 'artisan', 'ziggy:generate'],
+                startup: true,
+            }
+        ]),
     ],
 });

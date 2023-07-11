@@ -3,9 +3,12 @@
 namespace Tests\Unit;
 
 use App\Exceptions\LoadsFileException;
+use App\Models\Data;
+use App\Models\DataSet;
 use App\Models\DataSetLoader;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class DataSetLoaderTest extends TestCase
@@ -21,6 +24,8 @@ class DataSetLoaderTest extends TestCase
         parent::setUp();
         $this->dataDir = __DIR__.'/../data/20230110_103241';
         $this->extraData = __DIR__.'/../data/20230110_103417';
+        DB::table('data_sets')->delete();
+        DB::table('data')->delete();
     }
 
     public function test_config_file_name()
@@ -48,9 +53,8 @@ class DataSetLoaderTest extends TestCase
         Config::set('ced2graph.config_file','config.yaml');
         $loader = new DataSetLoader($this->dataDir);
         $ds = $loader->store('a comment','a label');
-        $this->assertEquals('a comment', $ds->comment);
+        $this->assertEquals('a comment', $ds->comments);
         $this->assertNotNull($ds->id);
-        $this->assertEquals($ds->config_md5, md5(file_get_contents($loader->configFile())));
         $this->assertCount(17, $ds->data);
         $this->assertEquals('a label', $ds->data->first()->label);
 
