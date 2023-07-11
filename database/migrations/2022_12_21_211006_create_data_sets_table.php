@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('config_id')->constrained();
             $table->string('label',20)->nullable();
-            $table->timestamp('begin_at');
+            $table->timestamp('begin_at')->useCurrent();
             $table->timestamp('end_at')->nullable();
             $table->string('interval',20);
             $table->string('mya_deployment',20);
