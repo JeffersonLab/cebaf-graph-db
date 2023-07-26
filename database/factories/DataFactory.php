@@ -15,11 +15,11 @@ class DataFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'data_set_id' => DataSet::factory(),
-            'globals' => json_encode(["foo" => "bar"] ),
+            'globals' => json_encode(['foo' => 'bar']),
             'graph' => 'stores a blob',
         ];
     }

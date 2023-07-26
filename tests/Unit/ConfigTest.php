@@ -3,17 +3,14 @@
 namespace Tests\Unit;
 
 use App\Models\Config;
-use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class ConfigTest extends TestCase
 {
     /**
      * A basic unit test example.
-     *
-     * @return void
      */
-    public function test_its_factory_produces_good_yaml()
+    public function test_its_factory_produces_good_yaml(): void
     {
         $config = Config::factory()->make();
         $yaml = yaml_parse($config->yaml);
@@ -25,10 +22,8 @@ class ConfigTest extends TestCase
 
     /**
      * A basic unit test example.
-     *
-     * @return void
      */
-    public function test_it_rejects_invalid_yaml()
+    public function test_it_rejects_invalid_yaml(): void
     {
         $config = Config::factory()->make();
         $config->yaml = "This is just a sentence.\nAnd this is another.";
@@ -40,5 +35,4 @@ class ConfigTest extends TestCase
         $this->assertFalse($config->save());
         $this->assertContains('The yaml lacks mya key.', $config->errors()->all());
     }
-
 }

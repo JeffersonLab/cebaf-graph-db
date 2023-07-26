@@ -9,10 +9,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('data', function (Blueprint $table) {
             $table->id();
@@ -20,19 +18,17 @@ return new class extends Migration
             $table->timestamp('timestamp');
             $table->string('label')->nullable();
             $table->json('globals');
-            $table->unique(['data_set_id','timestamp']);
+            $table->unique(['data_set_id', 'timestamp']);
         });
 
         // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
-        DB::statement("ALTER TABLE data ADD graph MEDIUMBLOB");
+        DB::statement('ALTER TABLE data ADD graph MEDIUMBLOB');
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('data');
     }
