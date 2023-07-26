@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Response;
 use App\Http\Requests\StoreDataSetRequest;
 use App\Http\Requests\UpdateDataSetRequest;
 use App\Http\Resources\DataSetCollection;
@@ -11,6 +10,7 @@ use App\Models\DataSet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class DataSetController extends Controller
 {
