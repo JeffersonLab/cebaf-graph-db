@@ -21,7 +21,6 @@
 import Layout from '../Layout.vue'
 
 export default {
-    name: "Index",
     components: {
         Layout,
     },

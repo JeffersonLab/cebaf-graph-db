@@ -24,7 +24,7 @@ class DataSetController extends Controller
     {
 
         $items = new DataSetCollection(DataSet::cursor());
-        return Inertia::render('DataSet/Index', [
+        return Inertia::render('DataSet/ListView', [
             'dataSets' =>  $items->toArray($request),
         ]);
     }
@@ -59,7 +59,7 @@ class DataSetController extends Controller
     public function show(DataSet $dataSet)
     {
         $resource = new DataSetResource($dataSet);
-        return Inertia::render('DataSet/Show', [
+        return Inertia::render('DataSet/ItemView', [
             'dataSet' =>  $resource,
         ]);
     }
