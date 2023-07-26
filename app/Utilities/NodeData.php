@@ -38,7 +38,7 @@ class NodeData
      *
      * @return string
      */
-    protected function typeDataFile()
+    protected function typeDataFile(): string
     {
         return $this->path.DIRECTORY_SEPARATOR.config('ced2graph.type_file');
     }
@@ -48,7 +48,7 @@ class NodeData
      *
      * @return string
      */
-    protected function nodeDataFile()
+    protected function nodeDataFile(): string
     {
         return $this->path.DIRECTORY_SEPARATOR.config('ced2graph.node_file');
     }
@@ -102,7 +102,7 @@ class NodeData
      *
      * @throws NodeDataException
      */
-    public function value($node, $field): mixed
+    public function value(string $node, string $field): mixed
     {
         $type = null;
         $values = [];

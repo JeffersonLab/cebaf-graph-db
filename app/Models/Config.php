@@ -39,7 +39,7 @@ class Config extends BaseModel
      *
      * @return string[]
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = static::$rules;
         $rules['yaml'] = Arr::wrap($rules['yaml']);

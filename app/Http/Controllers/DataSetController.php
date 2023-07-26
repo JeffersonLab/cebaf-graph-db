@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Response;
 use App\Http\Requests\StoreDataSetRequest;
 use App\Http\Requests\UpdateDataSetRequest;
 use App\Http\Resources\DataSetCollection;
@@ -18,7 +19,7 @@ class DataSetController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $items = new DataSetCollection(DataSet::cursor());
 
@@ -52,7 +53,7 @@ class DataSetController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function show(DataSet $dataSet)
+    public function show(DataSet $dataSet): Response
     {
         $resource = new DataSetResource($dataSet);
 

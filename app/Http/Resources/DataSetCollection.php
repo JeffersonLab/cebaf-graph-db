@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class DataSetCollection extends ResourceCollection
@@ -12,7 +13,7 @@ class DataSetCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         return $this->collection->map(function ($item) {
             return [
