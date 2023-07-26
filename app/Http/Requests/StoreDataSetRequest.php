@@ -2,16 +2,24 @@
 
 namespace App\Http\Requests;
 
+use App\Models\DataSet;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDataSetRequest extends FormRequest
 {
     /**
+     * The route that users should be redirected to if validation fails.
+     *
+     * @var string
+     */
+    protected $redirectRoute = 'data-sets.create';
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user() != null;
     }
 
     /**
@@ -21,8 +29,7 @@ class StoreDataSetRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+
+        return DataSet::$rules;
     }
 }

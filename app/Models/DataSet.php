@@ -28,10 +28,14 @@ class DataSet extends BaseModel
     ];
 
     public static $rules = [
+        'config_id' => ['required', 'exists:configs,id'],
+        'label' => ['nullable'],
+        'end_at' => ['nullable', 'date'],
         'status' => 'required | inConfig:settings.data_set_statuses',
         'mya_deployment' => 'required | inConfig:settings.mya_deployments',
         'begin_at' => 'required | date',
         'ends_at' => 'nullable | date',
+        'interval' => 'required',
         'comments' => 'required',
     ];
 

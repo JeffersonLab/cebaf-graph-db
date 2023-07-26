@@ -39,11 +39,15 @@ class DataSetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function store(StoreDataSetRequest $request)
     {
-        //
+        $dataSet = DataSet::make($request->all());
+        if ($dataSet->save()){
+            return to_route('data-sets.show', ['data_set' => $dataSet]);
+        }
+        return to_route('data-sets.create')->withErrors(['form' => 'Unable to save form.']);
     }
 
     /**
