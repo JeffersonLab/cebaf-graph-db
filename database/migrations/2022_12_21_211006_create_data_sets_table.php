@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('end_at')->nullable();
             $table->string('interval',20);
             $table->string('mya_deployment',20);
+            $table->string('ced_workspace',40)->nullable();
             $table->string('status');
             $table->text('comments');
         });
