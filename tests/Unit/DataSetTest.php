@@ -17,14 +17,14 @@ class DataSetTest extends TestCase
      *
      * @return void
      */
-    public function test_its_factory_produces_valid_model()
+    public function test_its_factory_produces_valid_model(): void
     {
         $dataSet = DataSet::factory()->make();
         $dataSet->validate();
         $this->assertTrue($dataSet->save());
     }
 
-    public function test_it_exports_to_disk_and_cleans_up()
+    public function test_it_exports_to_disk_and_cleans_up(): void
     {
         $set = DataSet::factory()->create();
         foreach (['2023-01-28 00:00', '2023-01-28 01:00', '2023-01-28 02:00'] as $ts) {
@@ -48,7 +48,7 @@ class DataSetTest extends TestCase
         }
     }
 
-    public function test_it_write_to_a_zip_file()
+    public function test_it_write_to_a_zip_file(): void
     {
         $set = DataSet::factory()->create();
         foreach (['2023-01-28 00:00', '2023-01-28 01:00', '2023-01-28 02:00'] as $ts) {

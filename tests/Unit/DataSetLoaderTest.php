@@ -27,7 +27,7 @@ class DataSetLoaderTest extends TestCase
         DB::table('data')->delete();
     }
 
-    public function test_config_file_name()
+    public function test_config_file_name(): void
     {
         // First we test valid path and file
         Config::set('ced2graph.config_file', 'config.yaml');
@@ -35,20 +35,20 @@ class DataSetLoaderTest extends TestCase
         $this->assertEquals($this->dataDir.'/config.yaml', $loader->configFile());
     }
 
-    public function test_it_gives_exception_on_invalid_path()
+    public function test_it_gives_exception_on_invalid_path(): void
     {
         $this->expectException(LoadsFileException::class);
         $loader = new DataSetLoader(__DIR__.'/../data/no_such_path');
     }
 
-    public function test_it_gives_exception_on_invalid_filename()
+    public function test_it_gives_exception_on_invalid_filename(): void
     {
         Config::set('ced2graph.config_file', 'not.config.yaml');  // Doesn't exist in dir below
         $this->expectException(LoadsFileException::class);
         $loader = new DataSetLoader($this->dataDir);
     }
 
-    public function test_store_and_append_and_replace()
+    public function test_store_and_append_and_replace(): void
     {
         Config::set('ced2graph.config_file', 'config.yaml');
         $loader = new DataSetLoader($this->dataDir);

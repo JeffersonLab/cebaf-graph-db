@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('table_data_set_model', function (Blueprint $table) {
             $table->foreignId('model_id')->constrained()->cascadeOnDelete();
@@ -26,7 +26,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('table_data_set_model');
     }

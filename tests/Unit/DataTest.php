@@ -16,14 +16,14 @@ class DataTest extends TestCase
      *
      * @return void
      */
-    public function test_it_generates_correct_file_names_for_export()
+    public function test_it_generates_correct_file_names_for_export(): void
     {
         $data = Data::factory()->create(['timestamp' => '2023-01-27 23:00']);
         $this->assertEquals($data->id.'_20230127_230000_graph.pkl', $data->exportGraphFileName());
         $this->assertEquals($data->id.'_20230127_230000_globals.json', $data->exportGlobalsFileName());
     }
 
-    public function test_it_writes_files_to_disk_and_cleans_up()
+    public function test_it_writes_files_to_disk_and_cleans_up(): void
     {
         $data = Data::factory()->create(['timestamp' => '2023-01-27 23:00']);
         $outputPath = $data->dataSet->exportPath();

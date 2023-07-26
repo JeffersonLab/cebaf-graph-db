@@ -31,7 +31,7 @@ class GraphDataAppend extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         try {
             $loader = new DataSetLoader($this->argument('directory'));

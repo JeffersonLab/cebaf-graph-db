@@ -21,7 +21,7 @@ class DataLoaderTest extends TestCase
         $this->dataDir = __DIR__.'/../data/20230110_103241/20210910_000000';
     }
 
-    public function test_graph_file_name()
+    public function test_graph_file_name(): void
     {
         $ds = DataSet::factory()->create();
 
@@ -40,7 +40,7 @@ class DataLoaderTest extends TestCase
         $loader = new DataLoader($this->dataDir, $ds);
     }
 
-    public function test_store()
+    public function test_store(): void
     {
         Config::set('ced2graph.graph_file', 'graph.pkl');
         $ds = DataSet::factory()->create();

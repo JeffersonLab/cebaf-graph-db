@@ -12,7 +12,7 @@ class ConfigTest extends TestCase
      *
      * @return void
      */
-    public function test_its_factory_produces_good_yaml()
+    public function test_its_factory_produces_good_yaml(): void
     {
         $config = Config::factory()->make();
         $yaml = yaml_parse($config->yaml);
@@ -27,7 +27,7 @@ class ConfigTest extends TestCase
      *
      * @return void
      */
-    public function test_it_rejects_invalid_yaml()
+    public function test_it_rejects_invalid_yaml(): void
     {
         $config = Config::factory()->make();
         $config->yaml = "This is just a sentence.\nAnd this is another.";

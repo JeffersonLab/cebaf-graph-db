@@ -10,7 +10,7 @@ class DataSetResource extends BaseResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         $resourceData = parent::toArray($request);
         $resourceData['data'] = DataResource::collection($this->resource->data)->toArray($request);
