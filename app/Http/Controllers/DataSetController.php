@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDataSetRequest;
 use App\Http\Requests\UpdateDataSetRequest;
-use App\Http\Resources\DataResource;
 use App\Http\Resources\DataSetCollection;
 use App\Http\Resources\DataSetResource;
-use App\Models\Data;
 use App\Models\DataSet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,10 +20,10 @@ class DataSetController extends Controller
      */
     public function index(Request $request)
     {
-
         $items = new DataSetCollection(DataSet::cursor());
+
         return Inertia::render('DataSet/ListView', [
-            'dataSets' =>  $items->toArray($request),
+            'dataSets' => $items->toArray($request),
         ]);
     }
 
@@ -42,7 +40,6 @@ class DataSetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDataSetRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDataSetRequest $request)
@@ -53,21 +50,20 @@ class DataSetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DataSet  $dataSet
      * @return \Inertia\Response
      */
     public function show(DataSet $dataSet)
     {
         $resource = new DataSetResource($dataSet);
+
         return Inertia::render('DataSet/ItemView', [
-            'dataSet' =>  $resource,
+            'dataSet' => $resource,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DataSet  $dataSet
      * @return \Illuminate\Http\Response
      */
     public function edit(DataSet $dataSet)
@@ -78,8 +74,6 @@ class DataSetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDataSetRequest  $request
-     * @param  \App\Models\DataSet  $dataSet
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateDataSetRequest $request, DataSet $dataSet)
@@ -90,7 +84,6 @@ class DataSetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DataSet  $dataSet
      * @return \Illuminate\Http\Response
      */
     public function destroy(DataSet $dataSet)
@@ -98,14 +91,16 @@ class DataSetController extends Controller
         //
     }
 
-    public function zip(DataSet $dataSet){
-        try{
-            if (! Storage::exists('public/'.$dataSet->publicZipFile())){
+    public function zip(DataSet $dataSet)
+    {
+        try {
+            if (! Storage::exists('public/'.$dataSet->publicZipFile())) {
                 $dataSet->makePublicZipFile();
 //                sleep(1);  // time to flush to disk?
             }
+
             return Storage::download('public/'.$dataSet->publicZipFile());
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             abort(404, $e->getMessage());
         }
     }

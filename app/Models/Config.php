@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Closure;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Jlab\LaravelUtilities\BaseModel;
 
@@ -16,7 +15,7 @@ class Config extends BaseModel
 
     public static $rules = [
         'yaml' => 'required',
-        'comments' => ''
+        'comments' => '',
     ];
 
     /**
@@ -26,12 +25,12 @@ class Config extends BaseModel
      *
      * Returns null if key does not exist.
      *
-     * @param $key
      * @return mixed
      */
     public function retrieve($key)
     {
         $parsed = yaml_parse($this->yaml);
+
         return Arr::get($parsed, $key, null);
     }
 
@@ -48,18 +47,17 @@ class Config extends BaseModel
         // be stored in the yaml column is plausibly valid.
         $rules['yaml'][] = function (string $attribute, mixed $value, Closure $fail) {
             $parsed = yaml_parse($value);
-            if (! is_array($parsed)){
+            if (! is_array($parsed)) {
                 $fail("The {$attribute} formatting is not valid.");
-            }else{
-                foreach (['ced','nodes','mya','edges','output'] as $key){
+            } else {
+                foreach (['ced', 'nodes', 'mya', 'edges', 'output'] as $key) {
                     if (! array_key_exists($key, $parsed)) {
                         $fail("The {$attribute} lacks {$key} key.");
                     }
                 }
             }
         };
+
         return $rules;
     }
-
-
 }

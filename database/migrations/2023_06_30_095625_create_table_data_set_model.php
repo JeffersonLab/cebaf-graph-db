@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('table_data_set_model', function (Blueprint $table) {
             $table->foreignId('model_id')->constrained()->cascadeOnDelete();
             $table->foreignId('data_set_id')->constrained()->cascadeOnDelete();
-            $table->string('purpose',20);
-            $table->primary(['model_id','data_set_id','purpose']);
+            $table->string('purpose', 20);
+            $table->primary(['model_id', 'data_set_id', 'purpose']);
         });
     }
 

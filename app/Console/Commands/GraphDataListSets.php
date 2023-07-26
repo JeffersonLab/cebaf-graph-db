@@ -30,8 +30,9 @@ class GraphDataListSets extends Command
     {
         $this->table(
             ['ID', 'Created', 'Comment'],
-            DataSet::all(['id', 'created_at','comment'])->toArray()
+            DataSet::all(['id', 'created_at', 'comment'])->toArray()
         );
+
         return Command::SUCCESS;
     }
 }

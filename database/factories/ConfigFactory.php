@@ -22,8 +22,9 @@ class ConfigFactory extends Factory
         ];
     }
 
-    protected function yaml(){
-        $yaml = <<<EOD
+    protected function yaml()
+    {
+        $yaml = <<<'EOD'
 ---
 ced:
   history: true           # Optional.  Default is false meaning use OPS ced.
@@ -106,7 +107,7 @@ output:
   seconds: false
 
 EOD;
-    return $yaml;
-    }
 
+        return $yaml;
+    }
 }

@@ -20,11 +20,11 @@ return new class extends Migration
             $table->timestamp('timestamp');
             $table->string('label')->nullable();
             $table->json('globals');
-            $table->unique(['data_set_id','timestamp']);
+            $table->unique(['data_set_id', 'timestamp']);
         });
 
         // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
-        DB::statement("ALTER TABLE data ADD graph MEDIUMBLOB");
+        DB::statement('ALTER TABLE data ADD graph MEDIUMBLOB');
     }
 
     /**

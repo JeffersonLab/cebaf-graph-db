@@ -14,11 +14,11 @@ class DataSetCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return $this->collection->map(function($item){
+        return $this->collection->map(function ($item) {
             return [
-              'id' => $item->id,
-              'comment' => $item->comment,
-              'graphCount' => $item->data()->count(),
+                'id' => $item->id,
+                'comment' => $item->comment,
+                'graphCount' => $item->data()->count(),
             ];
         });
     }

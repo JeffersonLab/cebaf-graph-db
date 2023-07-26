@@ -19,7 +19,6 @@ class DataLoaderTest extends TestCase
     {
         parent::setUp();
         $this->dataDir = __DIR__.'/../data/20230110_103241/20210910_000000';
-
     }
 
     public function test_graph_file_name()
@@ -27,7 +26,7 @@ class DataLoaderTest extends TestCase
         $ds = DataSet::factory()->create();
 
         // First we test valid path and file
-        Config::set('ced2graph.graph_file','graph.pkl');
+        Config::set('ced2graph.graph_file', 'graph.pkl');
         $loader = new DataLoader($this->dataDir, $ds);
         $this->assertEquals($this->dataDir.'/graph.pkl', $loader->graphFile());
 
@@ -36,14 +35,14 @@ class DataLoaderTest extends TestCase
         $loader = new DataLoader(__DIR__.'/../data/no_such_path', $ds);
 
         // and invalid file name
-        Config::set('ced2graph.graph_file','not.graph.pkl');  // Doesn't exist in dir below
+        Config::set('ced2graph.graph_file', 'not.graph.pkl');  // Doesn't exist in dir below
         $this->expectException(LoadsFileException::class);
         $loader = new DataLoader($this->dataDir, $ds);
-
     }
 
-    public function test_store(){
-        Config::set('ced2graph.graph_file','graph.pkl');
+    public function test_store()
+    {
+        Config::set('ced2graph.graph_file', 'graph.pkl');
         $ds = DataSet::factory()->create();
         $loader = new DataLoader($this->dataDir, $ds);
         $data = $loader->store('GOOD');
@@ -53,5 +52,4 @@ class DataLoaderTest extends TestCase
         $this->assertEquals($ds->id, $data->dataSet->id);
         // TODO timestamp assertion
     }
-
 }

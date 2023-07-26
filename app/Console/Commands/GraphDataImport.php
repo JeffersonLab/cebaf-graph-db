@@ -10,6 +10,7 @@ class GraphDataImport extends Command
     /**
      * The name and signature of the console command.
      * TODO option to append to existing data set id
+     *
      * @var string
      */
     protected $signature = 'graph-data:import
@@ -31,14 +32,16 @@ class GraphDataImport extends Command
      */
     public function handle()
     {
-        try{
-            $loader = new DataSetLoader( $this->argument('directory'));
+        try {
+            $loader = new DataSetLoader($this->argument('directory'));
             $dataSet = $loader->store($this->option('comment'), $this->option('label'));
-            $this->line('Saved as data set number ' . $dataSet->id);
-        }catch (\Exception $e){
+            $this->line('Saved as data set number '.$dataSet->id);
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
+
             return Command::FAILURE;
         }
+
         return Command::SUCCESS;
     }
 }

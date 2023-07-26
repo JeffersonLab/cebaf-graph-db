@@ -2,11 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 class DataSetResource extends BaseResource
 {
-
     /**
      * Transform the resource into an array.
      *
@@ -18,6 +15,7 @@ class DataSetResource extends BaseResource
         $resourceData = parent::toArray($request);
         $resourceData['data'] = DataResource::collection($this->resource->data)->toArray($request);
         $resourceData['config'] = $this->resource->config->yaml;
+
         return $resourceData;
     }
 }

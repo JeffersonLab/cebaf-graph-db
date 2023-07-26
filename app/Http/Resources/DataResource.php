@@ -2,12 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
 class DataResource extends BaseResource
 {
-
-
     /**
      * Transform the resource into an array.
      *
@@ -18,6 +14,7 @@ class DataResource extends BaseResource
     {
         $resourceData = parent::toArray($request);
         $resourceData['graph'] = '#';
+
         return $resourceData;
     }
 }

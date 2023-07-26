@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Models\Config;
-use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class ConfigTest extends TestCase
@@ -40,5 +39,4 @@ class ConfigTest extends TestCase
         $this->assertFalse($config->save());
         $this->assertContains('The yaml lacks mya key.', $config->errors()->all());
     }
-
 }

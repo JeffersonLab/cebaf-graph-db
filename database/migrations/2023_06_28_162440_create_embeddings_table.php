@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
         // once the table is created use a raw query to ALTER it and add the LONGBLOB
-        DB::statement("ALTER TABLE embeddings ADD embedding LONGBLOB");
+        DB::statement('ALTER TABLE embeddings ADD embedding LONGBLOB');
     }
 
     /**

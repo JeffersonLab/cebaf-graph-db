@@ -5,7 +5,6 @@ namespace App\Utilities;
 use App\Exceptions\LoadsFileException;
 use App\Exceptions\NodeDataException;
 use App\Traits\LoadsFile;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class helper for working with node.dat files produced by ced2graph.
@@ -19,13 +18,9 @@ class NodeData
      */
     public $typeData = [];
 
-    /**
-     * @var
-     */
     public $nodeData;
 
     /**
-     * @param string $path
      * @throws LoadsFileException
      */
     public function __construct(string $path)
@@ -45,7 +40,7 @@ class NodeData
      */
     protected function typeDataFile()
     {
-        return $this->path . DIRECTORY_SEPARATOR . config('ced2graph.type_file');
+        return $this->path.DIRECTORY_SEPARATOR.config('ced2graph.type_file');
     }
 
     /**
@@ -55,13 +50,11 @@ class NodeData
      */
     protected function nodeDataFile()
     {
-        return $this->path . DIRECTORY_SEPARATOR . config('ced2graph.node_file');
+        return $this->path.DIRECTORY_SEPARATOR.config('ced2graph.node_file');
     }
 
     /**
      * Create the typeData array from data file.
-     *
-     * @return void
      */
     protected function buildTypeData(): void
     {
@@ -74,15 +67,13 @@ class NodeData
                 continue;
             }
             // We flip the array so that we can use string keys to find numeric positions
-            $fields = array_flip(explode(",", $items[2]));
+            $fields = array_flip(explode(',', $items[2]));
             $this->typeData[$id] = $fields;
         }
     }
 
     /**
      * Create the nodeData array from data file.
-     *
-     * @return void
      */
     protected function buildNodeData(): void
     {
@@ -95,7 +86,7 @@ class NodeData
             if ($name == 'NAME') {
                 continue;
             }
-            $values = explode(",", $items[3]);
+            $values = explode(',', $items[3]);
             $this->nodeData[$name] = [
                 'type' => $type,
                 'values' => $values,
@@ -106,12 +97,12 @@ class NodeData
     /**
      * The get value of a node field.
      *
-     * @param string $node
-     * @param string $field
-     * @return mixed
+     * @param  string  $node
+     * @param  string  $field
+     *
      * @throws NodeDataException
      */
-    public function value($node, $field) : mixed
+    public function value($node, $field): mixed
     {
         $type = null;
         $values = [];
@@ -133,6 +124,5 @@ class NodeData
             return $values[$index];
         }
         throw new NodeDataException("No data for $field of $node.");
-
     }
 }

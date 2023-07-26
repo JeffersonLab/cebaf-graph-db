@@ -19,7 +19,7 @@ class DataFactory extends Factory
     {
         return [
             'data_set_id' => DataSet::factory(),
-            'globals' => json_encode(["foo" => "bar"] ),
+            'globals' => json_encode(['foo' => 'bar']),
             'graph' => 'stores a blob',
         ];
     }
