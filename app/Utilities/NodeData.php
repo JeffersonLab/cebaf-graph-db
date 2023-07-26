@@ -35,8 +35,6 @@ class NodeData
 
     /**
      * The full path to the file containing type info data.
-     *
-     * @return string
      */
     protected function typeDataFile(): string
     {
@@ -45,8 +43,6 @@ class NodeData
 
     /**
      * The full path to file containg nonde data.
-     *
-     * @return string
      */
     protected function nodeDataFile(): string
     {
@@ -97,8 +93,6 @@ class NodeData
     /**
      * The get value of a node field.
      *
-     * @param  string  $node
-     * @param  string  $field
      *
      * @throws NodeDataException
      */

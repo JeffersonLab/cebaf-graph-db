@@ -9,8 +9,6 @@ class ConfigTest extends TestCase
 {
     /**
      * A basic unit test example.
-     *
-     * @return void
      */
     public function test_its_factory_produces_good_yaml(): void
     {
@@ -24,8 +22,6 @@ class ConfigTest extends TestCase
 
     /**
      * A basic unit test example.
-     *
-     * @return void
      */
     public function test_it_rejects_invalid_yaml(): void
     {

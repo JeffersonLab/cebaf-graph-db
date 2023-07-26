@@ -13,8 +13,6 @@ class DataTest extends TestCase
 
     /**
      * A basic feature test example.
-     *
-     * @return void
      */
     public function test_it_generates_correct_file_names_for_export(): void
     {

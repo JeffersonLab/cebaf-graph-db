@@ -16,8 +16,6 @@ class DataSetController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Inertia\Response
      */
     public function index(Request $request): Response
     {
@@ -50,8 +48,6 @@ class DataSetController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @return \Inertia\Response
      */
     public function show(DataSet $dataSet): Response
     {

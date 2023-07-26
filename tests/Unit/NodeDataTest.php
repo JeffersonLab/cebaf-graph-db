@@ -22,8 +22,6 @@ class NodeDataTest extends TestCase
 
     /**
      * A basic test example.
-     *
-     * @return void
      */
     public function test_that_value_is_retrieved(): void
     {

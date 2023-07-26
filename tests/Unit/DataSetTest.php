@@ -14,8 +14,6 @@ class DataSetTest extends TestCase
 
     /**
      * A basic unit test example.
-     *
-     * @return void
      */
     public function test_its_factory_produces_valid_model(): void
     {
