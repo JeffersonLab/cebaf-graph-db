@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -8,7 +9,7 @@ return [
     | The list of valid names of mya deployments
     |
     */
-    'mya_deployments' => ['history','ops'],
+    'mya_deployments' => ['history', 'ops'],
     /*
     |--------------------------------------------------------------------------
     | Data Set Statuses
@@ -21,7 +22,7 @@ return [
     |   POPULATED: Data set has been populated
     |   QUEUED:    Data set has been queued for background data fetching
     */
-    'data_set_statuses' => ['ACTIVE','DISABLED','NEW','POPULATED','QUEUED'],
+    'data_set_statuses' => ['ACTIVE', 'DISABLED', 'NEW', 'POPULATED', 'QUEUED'],
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +34,6 @@ return [
     */
     'data_sets_export_dir' => 'data-sets',
 
-
     /*
     |--------------------------------------------------------------------------
     | Data Export Directory
@@ -43,8 +43,5 @@ return [
     |
     */
     'data_export_dir' => 'data',
-
-
-
 
 ];

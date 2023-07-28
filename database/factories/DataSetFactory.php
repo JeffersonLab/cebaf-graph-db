@@ -15,11 +15,11 @@ class DataSetFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'config_id' => Config::factory(),
-            'begin_at' => $this->faker->dateTime(),
+            'begin_at' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
             'mya_deployment' => 'history',
             'comments' => $this->faker->text(),
 

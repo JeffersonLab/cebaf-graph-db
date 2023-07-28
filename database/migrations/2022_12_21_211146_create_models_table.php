@@ -9,29 +9,25 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('models', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('type',20);
+            $table->string('type', 20);
             $table->boolean('classifies')->default(false);
             $table->text('comments');
         });
 
         // once the table is created use a raw query to ALTER it and add the LONGBLOB
-        DB::statement("ALTER TABLE models ADD code LONGBLOB");
+        DB::statement('ALTER TABLE models ADD code LONGBLOB');
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('models');
     }

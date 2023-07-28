@@ -12,31 +12,32 @@ class NodeDataTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
-        Config::set('ced2graph.node_file','node.dat');
-        Config::set('ced2graph.type_file','info.dat');
-        $this->nodeData = new NodeData(__DIR__ . '/../data/20230110_103241/20210913_000000');
+        Config::set('ced2graph.node_file', 'node.dat');
+        Config::set('ced2graph.type_file', 'info.dat');
+        $this->nodeData = new NodeData(__DIR__.'/../data/20230110_103241/20210913_000000');
     }
-
 
     /**
      * A basic test example.
-     *
-     * @return void
      */
-    public function test_that_value_is_retrieved()
+    public function test_that_value_is_retrieved(): void
     {
         // Expected value below is node number 69 on line 71 of the node.dat file
-        $this->assertEquals(10.0473, $this->nodeData->value('IBC0L02','Current'));
+        $this->assertEquals(10.0473, $this->nodeData->value('IBC0L02', 'Current'));
     }
-    public function test_it_gives_exception_on_invalid_field(){
+
+    public function test_it_gives_exception_on_invalid_field(): void
+    {
         $this->expectException(NodeDataException::class);
-        $this->assertEquals(10.0473, $this->nodeData->value('IBC0L02','NoSuchField'));
+        $this->assertEquals(10.0473, $this->nodeData->value('IBC0L02', 'NoSuchField'));
     }
-    public function test_it_gives_exception_on_invalid_node(){
+
+    public function test_it_gives_exception_on_invalid_node(): void
+    {
         $this->expectException(NodeDataException::class);
-        $this->assertEquals(10.0473, $this->nodeData->value('NoSuchNode','Current'));
+        $this->assertEquals(10.0473, $this->nodeData->value('NoSuchNode', 'Current'));
     }
 }

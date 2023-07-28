@@ -20,21 +20,21 @@ class DataSetLoader
     /**
      * Construct an instance.
      *
-     * @param string $path
      * @throws LoadsFileException
      */
-    public function __construct(string $path){
+    public function __construct(string $path)
+    {
         $this->path = $path;
         $this->assertPathIsReadable();
         $this->assertPathHasFile($this->configFile());
     }
 
-
     /**
      * Path to the config file.
      */
-    public function configFile() : string{
-        return $this->path . DIRECTORY_SEPARATOR .config('ced2graph.config_file');
+    public function configFile(): string
+    {
+        return $this->path.DIRECTORY_SEPARATOR.config('ced2graph.config_file');
     }
 
     /**
@@ -42,44 +42,44 @@ class DataSetLoader
      *
      * @throws \Throwable
      */
-    public function store(string $comment = null, $label=null): DataSet{
-        $dataSet = new DataSet(['comments' => $comment, 'begin_at'=>'2021-09-05']);
+    public function store(string $comment = null, $label = null): DataSet
+    {
+        $dataSet = new DataSet(['comments' => $comment, 'begin_at' => '2021-09-05']);
         $dataSet->config()->associate(Config::create(['yaml' => file_get_contents($this->configFile())]));
         DB::beginTransaction();
-        try{
-            if ($dataSet->save()){
+        try {
+            if ($dataSet->save()) {
                 $this->storeData($dataSet, $label);
-            }else{
+            } else {
                 dd($dataSet->errors());
             }
 
             DB::commit();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
+
         return $dataSet->fresh();
     }
-
-
 
     /**
      * Get the list of data directories within the data set directory.
      */
-    public function dataDirs(): array{
-        return glob($this->path . DIRECTORY_SEPARATOR . '*_*');  // expect yyyymmdd_hhiiss
+    public function dataDirs(): array
+    {
+        return glob($this->path.DIRECTORY_SEPARATOR.'*_*');  // expect yyyymmdd_hhiiss
     }
 
     /**
      * Store the data that comprise the data set.
      *
-     * @param DataSet $dataSet
-     * @return void
      * @throws LoadsFileException
      * @throws \Throwable
      */
-    public function storeData(DataSet $dataSet, $label = null): void{
-        foreach ( $this->dataDirs() as $path) {
+    public function storeData(DataSet $dataSet, $label = null): void
+    {
+        foreach ($this->dataDirs() as $path) {
             $loader = new DataLoader($path, $dataSet);
             $loader->store($label);
         }
@@ -88,17 +88,14 @@ class DataSetLoader
     /**
      * Store the data that comprise the data set.
      *
-     * @param DataSet $dataSet
-     * @return void
      * @throws LoadsFileException
      * @throws \Throwable
      */
-    public function replaceData(DataSet $dataSet, $label = null): void{
-        foreach ( $this->dataDirs() as $path) {
+    public function replaceData(DataSet $dataSet, $label = null): void
+    {
+        foreach ($this->dataDirs() as $path) {
             $loader = new DataLoader($path, $dataSet);
             $loader->replace($label);
         }
     }
-
-
 }

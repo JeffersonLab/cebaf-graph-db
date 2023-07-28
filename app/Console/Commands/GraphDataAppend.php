@@ -28,28 +28,28 @@ class GraphDataAppend extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        try{
-            $loader = new DataSetLoader( $this->argument('directory'));
+        try {
+            $loader = new DataSetLoader($this->argument('directory'));
             $dataSet = DataSet::findOrFail($this->argument('id'));
-            if ($this->option('replace')){
-                $loader->replaceData($dataSet,  $this->option('label'));
-            }else{
-                $loader->storeData($dataSet,  $this->option('label'));
+            if ($this->option('replace')) {
+                $loader->replaceData($dataSet, $this->option('label'));
+            } else {
+                $loader->storeData($dataSet, $this->option('label'));
             }
-
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
+
             return Command::FAILURE;
         }
+
         return Command::SUCCESS;
     }
 
-    protected function dataDirs($path): array{
-        return glob($path . DIRECTORY_SEPARATOR . '*_*');  // expect yyyymmdd_hhiiss
+    protected function dataDirs($path): array
+    {
+        return glob($path.DIRECTORY_SEPARATOR.'*_*');  // expect yyyymmdd_hhiiss
     }
 }
