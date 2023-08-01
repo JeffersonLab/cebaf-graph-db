@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,7 +14,7 @@
 |
 */
 
-/** @link https://pestphp.com/docs/configuring-tests */
+uses(TestCase::class, RefreshDatabase::class)->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +27,9 @@
 |
 */
 
-/** @link https://pestphp.com/docs/custom-expectations */
+expect()->extend('toBeOne', function () {
+    return $this->toBe(1);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +42,7 @@
 |
 */
 
-/** @link https://pestphp.com/docs/custom-helpers */
+function something()
+{
+    // ..
+}

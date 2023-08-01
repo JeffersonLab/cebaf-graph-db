@@ -27,16 +27,20 @@ class DataSet extends BaseModel
         'mya_deployment' => 'history',
     ];
 
+    protected $casts = [
+        'begin_at' => 'date',
+        'end_at' => 'date',
+    ];
+
     public static $rules = [
         'config_id' => ['required', 'exists:configs,id'],
         'label' => ['nullable'],
-        'end_at' => ['nullable', 'date'],
         'status' => 'required | inConfig:settings.data_set_statuses',
         'mya_deployment' => 'required | inConfig:settings.mya_deployments',
         'begin_at' => 'required | date',
-        'ends_at' => 'nullable | date',
+        'end_at' => 'nullable | date',
         'interval' => 'required',
-        'comments' => 'required',
+        'comments' => 'required|min:3',
     ];
 
     public function data()

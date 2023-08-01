@@ -7,41 +7,36 @@ use App\Http\Requests\UpdateDataSetRequest;
 use App\Http\Resources\DataSetCollection;
 use App\Http\Resources\DataSetResource;
 use App\Models\DataSet;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\View\View;
+
 
 class DataSetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
-        $items = new DataSetCollection(DataSet::cursor());
 
-        return Inertia::render('DataSet/ListView', [
-            'dataSets' => $items->toArray($request),
-        ]);
+        return view('data_sets.index')->with('dataSets',DataSet::cursor());
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('data_sets.form')->with('dataSet',DataSet::create());
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function store(StoreDataSetRequest $request)
+    public function store(StoreDataSetRequest $request): RedirectResponse
     {
         $dataSet = DataSet::make($request->all());
         if ($dataSet->save()){

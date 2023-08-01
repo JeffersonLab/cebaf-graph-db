@@ -2,12 +2,11 @@
 
 use App\Models\User;
 use \App\Models\DataSet;
+use Livewire\Livewire;
 use Illuminate\Testing\TestResponse;
 use App\Models\Config as DataSetConfig;
 use Tests\TestCase;
 
-uses(TestCase::class);
-uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 
 beforeEach(function () {
@@ -35,6 +34,16 @@ test('it redirects home page to data-sets', function () {
     $response = $this->get('/');
     expect($response->getStatusCode())->toBe(302);
     expect($response->headers->get('Location'))->toBe(route('data-sets.index'));
+});
+
+test('it renders create form', function () {
+    Livewire::test(\App\Livewire\DataSetForm::class)
+        ->assertStatus(200);
+    $this->get('/data-sets/create')
+        ->assertSeeLivewire(\App\Livewire\DataSetForm::class)
+        ->assertSee('status')
+        ->assertSee('mya_deployment')
+        ->assertSee('interval');
 });
 
 test('it stores a new data set', function () {
