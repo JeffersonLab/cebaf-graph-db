@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DataSetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,11 +20,14 @@ Route::get('/', function () {
     return redirect()->route('data-sets.index');
 });
 
-Route::get('data-sets/create', \App\Livewire\DataSetForm::class)->name('data-sets.create');
+//Route::get('data-sets/create', \App\Livewire\DataSetForm::class)->name('data-sets.create');
+Route::get('data-sets/create', [DataSetController::class, 'create'])->name('data-sets.create');
 Route::get('data-sets', [DataSetController::class, 'index'])->name('data-sets.index');
 Route::post('data-sets', [DataSetController::class, 'store'])->name('data-sets.store');
 Route::get('data-sets/{data_set}', [DataSetController::class, 'show'])->name('data-sets.show');
 
+// Configs
+Route::resource('configs', ConfigController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -13,7 +13,7 @@
 </style>
 
 <div class="col-md-2"></div>
-<div id="logo" class="col-md-8">
+<div id="logo" class="col-md-8 bg-gray-100">
     <!-- logo -->
     <a href="{{ URL::route('data-sets.index') }}">
     <span class="app-title">CEBAF Graph Database</span>

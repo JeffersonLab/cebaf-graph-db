@@ -15,7 +15,8 @@
         "laravel/framework": "^10.16",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.0@beta"
+        "livewire/livewire": "^v2.12",
+        "rappasoft/laravel-livewire-tables": "^2.15"
     },
     "require-dev": {
         "ext-yaml": "*",

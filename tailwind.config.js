@@ -8,7 +8,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
+    prefix: 'tw-',
     theme: {
         extend: {
             fontFamily: {
@@ -16,6 +16,8 @@ export default {
             },
         },
     },
-
+    corePlugins: {
+        preflight: false,
+    },
     plugins: [forms],
 };

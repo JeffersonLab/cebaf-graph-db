@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Config as DataSetConfig;
-use Illuminate\Validation\Validator;
 use App\Models\DataSet;
 use Livewire\Component;
 
@@ -41,12 +40,11 @@ class DataSetForm extends Component
 
     public function save()
     {
-        $validated = $this->validate(DataSet::$rules);
-
+        $this->validate();
         DataSet::create(
-            $validated
+            $this->all()
         );
 
-        return $this->redirect('/data-sets');
+        $this->redirect('/data-sets');
     }
 }

@@ -10,7 +10,7 @@ use App\Models\DataSet;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 
 
 class DataSetController extends Controller
@@ -30,7 +30,7 @@ class DataSetController extends Controller
      */
     public function create(): View
     {
-        return view('data_sets.form')->with('dataSet',DataSet::create());
+        return view('data_sets.create')->with('dataSet',DataSet::create());
     }
 
     /**
@@ -48,13 +48,9 @@ class DataSetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DataSet $dataSet): Response
+    public function show(DataSet $dataSet): View
     {
-        $resource = new DataSetResource($dataSet);
-
-        return Inertia::render('DataSet/ItemView', [
-            'dataSet' => $resource,
-        ]);
+        return view('data_sets.show')->with('dataSet',$dataSet);
     }
 
     /**
