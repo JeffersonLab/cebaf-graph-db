@@ -34,13 +34,13 @@ class DataSet extends BaseModel
 
     public static $rules = [
         'config_id' => ['required', 'exists:configs,id'],
+        'name' => 'required|max:100',
         'label' => ['nullable'],
         'status' => 'required | inConfig:settings.data_set_statuses',
         'mya_deployment' => 'required | inConfig:settings.mya_deployments',
         'begin_at' => 'required | date',
         'end_at' => 'nullable | date',
         'interval' => 'required',
-        'comments' => 'required|min:3',
     ];
 
     public function data()

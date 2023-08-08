@@ -4,7 +4,7 @@
         <div class="form form-group">
             <label for="status">Status:</label>
             @error('status')
-            <div class="tw-text-red-600"> {{ $message }}</div> @enderror
+            <div class="tw-tw-text-red-600"> {{ $message }}</div> @enderror
             <input type="text" id="status" wire:model.defer="status" readonly
                    class="tw-bg-gray-100 tw-tw-shadow-sm sm:tw-rounded-lg"/>
         </div>
@@ -20,14 +20,17 @@
                 @endforeach
             </select>
             <small class="form-text text-muted">
-                (Required) Mya Depolyment to use (Ops = recent, History = old)
+                (Required) Mya Deployment to use (Ops = recent, History = old)
             </small>
         </div>
+
+        <x-forms.name-field />
+
 
         <div class="form-group">
             <label for="interval">Interval:</label>
             @error('interval')
-            <div class="text-red-600"> {{ $message }}</div> @enderror
+            <div class="tw-text-red-600"> {{ $message }}</div> @enderror
             <input type="text" id="interval" wire:model.defer="interval" class="tw-shadow-sm sm:tw-rounded-lg"/>
             <small class="form-text text-muted">
                 (required) An interval string understood by mya (ex: 1h, 5m, 2d, etc.)
@@ -37,7 +40,7 @@
         <div class="form-group">
             <label for="mya-deployment">Mya Deployment:</label>
             @error('mya_deployment')
-            <div class="text-red-600"> {{ $message }}</div> @enderror
+            <div class="tw-text-red-600"> {{ $message }}</div> @enderror
             <select id="mya-deployment" wire:model.defer="mya_deployment" class="tw-shadow-sm sm:tw-rounded-lg w-32">
                 @foreach (config('settings.mya_deployments') as $option)
                     <option value="{{ $option }}">{{ $option }}</option>
@@ -52,7 +55,7 @@
         <div class="form-group">
             <label for="begin_at">Begin At:</label>
             @error('begin_at')
-            <div class="text-red-600"> {{ $message }}</div> @enderror
+            <div class="tw-text-red-600"> {{ $message }}</div> @enderror
             <input id="begin_at" type="text" class="datepicker tw-shadow-sm sm:tw-rounded-lg tw-w-32 tw-mr-10"
                    wire:model.defer="begin_at"/>
             <small class="form-text text-muted">
@@ -63,7 +66,7 @@
         <div class="form-group">
             <label for="end_at">End At:</label>
             @error('end_at')
-            <div class="text-red-600"> {{ $message }}</div> @enderror
+            <div class="tw-text-red-600"> {{ $message }}</div> @enderror
             <input id="end_at" type="text" class="datepicker tw-shadow-sm sm:tw-rounded-lg tw-w-32"
                    wire:model="end_at"/>
             <small class="form-text text-muted">
@@ -72,15 +75,7 @@
         </div>
 
 
-        <div class="form-group">
-            <label for="comments">Comments:</label>
-            @error('comments')
-            <div class="text-red-600"> {{ $message }}</div> @enderror
-            <small class="form-text text-muted">
-                (required) Describe purpose and other key details of data set
-            </small>
-            <textarea type="text" wire:model="comments" class="tw-w-[40em] tw-shadow-sm sm:tw-rounded-lg"></textarea>
-        </div>
+        <x-forms.comments-field />
 
         <button class="btn btn-lg btn-primary text-white bg-primary " type="submit">Submit</button>
 
@@ -93,16 +88,14 @@
                 enableTime: false,
                 dateFormat: "Y-m-d",
                 onChange: function (selectedDates, dateStr, instance) {
-                    @this.
-                    set('begin_at', dateStr);
+                    @this.set('begin_at', dateStr);
                 },
             });
             flatpickr("#end_at", {
                 enableTime: false,
                 dateFormat: "Y-m-d",
                 onChange: function (selectedDates, dateStr, instance) {
-                    @this.
-                    set('end_at', dateStr);
+                    @this.set('end_at', dateStr);
                 },
             });
         }, false);

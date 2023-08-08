@@ -15,7 +15,8 @@ class GraphDataImport extends Command
      */
     protected $signature = 'graph-data:import
                             {directory  : directory of ced2graph output}
-                            {--comment= : comment to annotate the data set}
+                            {--name= : name to identify the data set}
+                            {--comments= : comments about the data set}
                             {--label=   : label to apply to data set items}';
 
     /**
@@ -32,7 +33,11 @@ class GraphDataImport extends Command
     {
         try {
             $loader = new DataSetLoader($this->argument('directory'));
-            $dataSet = $loader->store($this->option('comment'), $this->option('label'));
+            $dataSet = $loader->store(
+                $this->option('name'),
+                $this->option('comments'),
+                $this->option('label')
+            );
             $this->line('Saved as data set number '.$dataSet->id);
         } catch (\Exception $e) {
             $this->error($e->getMessage());

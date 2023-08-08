@@ -11,9 +11,10 @@ class Config extends BaseModel
 {
     use HasFactory;
 
-    public $fillable = ['yaml', 'comments'];
+    public $fillable = ['name', 'yaml', 'comments'];
 
     public static $rules = [
+        'name' => 'required|max:100',
         'yaml' => 'required',
         'comments' => '',
     ];

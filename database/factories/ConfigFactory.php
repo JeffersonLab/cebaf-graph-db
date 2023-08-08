@@ -17,8 +17,9 @@ class ConfigFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => $this->faker->text(40),
             'yaml' => $this->yaml(),
-            'comments' => $this->faker->text(),
+            'comments' => $this->faker->text()
         ];
     }
 

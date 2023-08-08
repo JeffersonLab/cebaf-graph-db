@@ -43,3 +43,13 @@ artisan graph-data:import  ./tests/data/20221221_092324 --comment="First Data Se
 ```
 
 
+## Reference
+
+Links for access to the reference documentation of toolkits used in the development of this application:
+
+- [Laravel Livewire](https://laravel-livewire.com/docs/2.x/reference)
+- [Laravel Livewire Tables](https://rappasoft.com/docs/laravel-livewire-tables/v2/introduction)
+- [Bootstrap 4](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
+- [Tailwind CSS](https://tailwindcss.com/docs/utility-first)
+- [Alpinejs](https://alpinejs.dev/start-here)
+- [PEST](https://pestphp.com/docs/writing-tests)

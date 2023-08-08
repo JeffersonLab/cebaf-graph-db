@@ -23,11 +23,11 @@ class DataSetTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Comments", "comments")
+            Column::make("Name", "name")
                 ->sortable(),
-            Column::make("Created at", "created_at")
+            Column::make("Created", "created_at")
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make("Updated", "updated_at")
                 ->sortable(),
         ];
     }

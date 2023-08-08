@@ -8,6 +8,10 @@
         </div>
 
         <div class="card-body">
+            <div>
+                <a class="btn btn-lg btn-primary text-white bg-primary tw-mb-1"
+                   href="{{route('data-sets.create')}}">Create</a>
+            </div>
             <livewire:data-set-table theme="bootstrap-4"/>
         </div>
 

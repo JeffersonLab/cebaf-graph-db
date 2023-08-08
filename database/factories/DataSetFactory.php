@@ -18,6 +18,7 @@ class DataSetFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => $this->faker->text(40),
             'config_id' => Config::factory(),
             'begin_at' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
             'mya_deployment' => 'history',

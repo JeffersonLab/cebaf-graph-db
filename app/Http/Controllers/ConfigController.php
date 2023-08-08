@@ -19,6 +19,7 @@ class ConfigController extends Controller
 
     public function create()
     {
+        return view('configs.create')->with('config',Config::make());
     }
 
     public function store(Request $request)

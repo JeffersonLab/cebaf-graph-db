@@ -20,7 +20,7 @@ class ConfigTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make("Comments", "comments")
+            Column::make("Name", "name")
                 ->sortable(),
             Column::make("Created", "created_at")
                 ->sortable(),

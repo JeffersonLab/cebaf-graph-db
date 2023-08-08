@@ -30,7 +30,7 @@ class DataSetController extends Controller
      */
     public function create(): View
     {
-        return view('data_sets.create')->with('dataSet',DataSet::create());
+        return view('data_sets.create')->with('dataSet',DataSet::make());
     }
 
     /**

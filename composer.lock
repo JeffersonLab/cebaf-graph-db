@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f81b5a659366c0ee8480a20734bc48bf",
+    "content-hash": "9a0e5db636b49b7c4d6bc07a2ef28a5a",
     "packages": [
         {
             "name": "brick/math",
@@ -1809,26 +1809,26 @@
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "c7f2872fb273bf493811473dafc88d60ae829f48"
+                "reference": "a6dfb1194a2946fcdc1f38219445234f65b35c96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/c7f2872fb273bf493811473dafc88d60ae829f48",
-                "reference": "c7f2872fb273bf493811473dafc88d60ae829f48",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/a6dfb1194a2946fcdc1f38219445234f65b35c96",
+                "reference": "a6dfb1194a2946fcdc1f38219445234f65b35c96",
                 "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
-                "php": "^7.2 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.2",
                 "phpstan/phpstan": "^0.12.68",
-                "phpunit/phpunit": "^8.5.8 || ^9.3"
+                "phpunit/phpunit": "^8.5.8 || ^9.3 || ^10.0"
             },
             "type": "library",
             "autoload": {
@@ -1849,7 +1849,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.12.0"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.13.0"
             },
             "funding": [
                 {
@@ -1861,7 +1861,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-03T07:14:11+00:00"
+            "time": "2023-08-05T12:09:49+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -5907,16 +5907,16 @@
         },
         {
             "name": "brianium/paratest",
-            "version": "v7.2.4",
+            "version": "v7.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paratestphp/paratest.git",
-                "reference": "a310a310973226f5c25de806987bfc11aa99ab91"
+                "reference": "4d7ad5b6564f63baa1b948ecad05439f22880942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/a310a310973226f5c25de806987bfc11aa99ab91",
-                "reference": "a310a310973226f5c25de806987bfc11aa99ab91",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/4d7ad5b6564f63baa1b948ecad05439f22880942",
+                "reference": "4d7ad5b6564f63baa1b948ecad05439f22880942",
                 "shasum": ""
             },
             "require": {
@@ -5986,7 +5986,7 @@
             ],
             "support": {
                 "issues": "https://github.com/paratestphp/paratest/issues",
-                "source": "https://github.com/paratestphp/paratest/tree/v7.2.4"
+                "source": "https://github.com/paratestphp/paratest/tree/v7.2.5"
             },
             "funding": [
                 {
@@ -5998,7 +5998,7 @@
                     "type": "paypal"
                 }
             ],
-            "time": "2023-08-04T09:22:30+00:00"
+            "time": "2023-08-08T13:23:59+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -6358,68 +6358,6 @@
             "time": "2021-10-08T21:21:46+00:00"
         },
         {
-            "name": "laravel/breeze",
-            "version": "v1.22.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/breeze.git",
-                "reference": "9123dde67e57301dc557c4990f7b27df59dd876f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/9123dde67e57301dc557c4990f7b27df59dd876f",
-                "reference": "9123dde67e57301dc557c4990f7b27df59dd876f",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^10.17",
-                "illuminate/filesystem": "^10.17",
-                "illuminate/support": "^10.17",
-                "illuminate/validation": "^10.17",
-                "php": "^8.1.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0",
-                "phpstan/phpstan": "^1.10"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Breeze\\BreezeServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Breeze\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
-            "keywords": [
-                "auth",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/breeze/issues",
-                "source": "https://github.com/laravel/breeze"
-            },
-            "time": "2023-08-02T18:59:04+00:00"
-        },
-        {
             "name": "laravel/pint",
             "version": "v1.10.5",
             "source": {
@@ -6618,31 +6556,31 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.4",
+            "version": "1.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "d1413755e26fe56a63455f7753221c86cbb88f66"
+                "reference": "68782e943f9ffcbc72bda08aedabe73fecb50041"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/d1413755e26fe56a63455f7753221c86cbb88f66",
-                "reference": "d1413755e26fe56a63455f7753221c86cbb88f66",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/68782e943f9ffcbc72bda08aedabe73fecb50041",
+                "reference": "68782e943f9ffcbc72bda08aedabe73fecb50041",
                 "shasum": ""
             },
             "require": {
                 "hamcrest/hamcrest-php": "^2.0.1",
                 "lib-pcre": ">=7.0",
-                "php": ">=7.4,<8.3"
+                "php": ">=7.3"
             },
             "conflict": {
                 "phpunit/phpunit": "<8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5 || ^9.3",
+                "phpunit/phpunit": "^8.5 || ^9.6.10",
                 "psalm/plugin-phpunit": "^0.18.4",
                 "symplify/easy-coding-standard": "^11.5.0",
-                "vimeo/psalm": "^5.13.1"
+                "vimeo/psalm": "^4.30"
             },
             "type": "library",
             "autoload": {
@@ -6699,7 +6637,7 @@
                 "security": "https://github.com/mockery/mockery/security/advisories",
                 "source": "https://github.com/mockery/mockery"
             },
-            "time": "2023-07-19T15:51:02+00:00"
+            "time": "2023-08-06T00:30:34+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -6762,16 +6700,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v7.8.0",
+            "version": "v7.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "1813f0a3470f2ac171443bc37b324c2a693005f9"
+                "reference": "61553ad3260845d7e3e49121b7074619233d361b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/1813f0a3470f2ac171443bc37b324c2a693005f9",
-                "reference": "1813f0a3470f2ac171443bc37b324c2a693005f9",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/61553ad3260845d7e3e49121b7074619233d361b",
+                "reference": "61553ad3260845d7e3e49121b7074619233d361b",
                 "shasum": ""
             },
             "require": {
@@ -6851,25 +6789,25 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-08-04T10:26:10+00:00"
+            "time": "2023-08-07T08:03:21+00:00"
         },
         {
             "name": "pestphp/pest",
-            "version": "v2.12.1",
+            "version": "v2.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "3742e74adf08415cef3912c10304e9184c1ee90d"
+                "reference": "e3a21384e69d6343f8223578bbc38d80e1224f08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/3742e74adf08415cef3912c10304e9184c1ee90d",
-                "reference": "3742e74adf08415cef3912c10304e9184c1ee90d",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/e3a21384e69d6343f8223578bbc38d80e1224f08",
+                "reference": "e3a21384e69d6343f8223578bbc38d80e1224f08",
                 "shasum": ""
             },
             "require": {
                 "brianium/paratest": "^7.2.4",
-                "nunomaduro/collision": "^7.8.0",
+                "nunomaduro/collision": "^7.8.1",
                 "nunomaduro/termwind": "^1.15.1",
                 "pestphp/pest-plugin": "^2.0.1",
                 "pestphp/pest-plugin-arch": "^2.2.3",
@@ -6941,7 +6879,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v2.12.1"
+                "source": "https://github.com/pestphp/pest/tree/v2.12.2"
             },
             "funding": [
                 {
@@ -6953,7 +6891,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-04T10:23:55+00:00"
+            "time": "2023-08-07T09:29:25+00:00"
         },
         {
             "name": "pestphp/pest-plugin",

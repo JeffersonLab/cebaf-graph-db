@@ -52,7 +52,7 @@ test('it stores a new data set', function () {
     $dataSet = \App\Models\DataSet::factory()->make();
     expect(DataSet::count('id'))->toBe(0); // make() doesn't save anything!
     expect($dataSet->validate())->toBe(true);
-    $formData = $dataSet->only(['status', 'label', 'begin_at', 'interval', 'mya_deployment', 'comments']);
+    $formData = $dataSet->only(['name','status', 'label', 'begin_at', 'interval', 'mya_deployment']);
     $formData['config_id'] = $config->id;
 
     // Post the form

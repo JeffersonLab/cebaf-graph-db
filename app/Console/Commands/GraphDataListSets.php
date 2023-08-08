@@ -27,8 +27,8 @@ class GraphDataListSets extends Command
     public function handle(): int
     {
         $this->table(
-            ['ID', 'Created', 'Comment'],
-            DataSet::all(['id', 'created_at', 'comments'])->toArray()
+            ['ID', 'Created', 'Name'],
+            DataSet::all(['id', 'created_at', 'name'])->toArray()
         );
 
         return Command::SUCCESS;

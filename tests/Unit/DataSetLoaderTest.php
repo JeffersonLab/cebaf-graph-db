@@ -52,7 +52,7 @@ class DataSetLoaderTest extends TestCase
     {
         Config::set('ced2graph.config_file', 'config.yaml');
         $loader = new DataSetLoader($this->dataDir);
-        $ds = $loader->store('a comment', 'a label');
+        $ds = $loader->store(config('ced2graph.config_file'),'a comment', 'a label');
         $this->assertEquals('a comment', $ds->comments);
         $this->assertNotNull($ds->id);
         $this->assertCount(17, $ds->data);

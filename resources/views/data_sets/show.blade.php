@@ -41,9 +41,12 @@
 
     @push('css')
         <link rel="stylesheet" href="{{ URL::asset('css/prism.css') }}" />
-        <script src="{{URL::asset('js/prism.js')}}" />
-
     @endpush
+
+    @push('js')
+        <script src="{{URL::asset('js/prism.js')}}" />
+    @endpush
+
 </x-app-layout>
 
 
