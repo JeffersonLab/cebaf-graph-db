@@ -12,9 +12,17 @@
                 <a class="nav-link disabled">Models</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-{{--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--}}
-{{--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
-        </form>
+        <div class="form-inline my-2 my-lg-0">
+            {{--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--}}
+            {{--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
+            @if(Auth::guest())
+                <a class="btn btn-outline-primary my-2 my-sm-0" href="{{route('login')}}">Login</a>
+            @else
+                <form method="post" action="{{route('logout')}}">
+                    @csrf
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Logout</button>
+                </form>
+            @endif
+        </div>
     </div>
 </nav>
