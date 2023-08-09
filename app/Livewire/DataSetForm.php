@@ -4,12 +4,16 @@ namespace App\Livewire;
 
 use App\Models\Config as DataSetConfig;
 use App\Models\DataSet;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class DataSetForm extends Component
 {
+    use AuthorizesRequests;
 
     // DB attributes snake case per convention
+    public $data_set_id;
     public $status;
     public $name;
     public $begin_at;
@@ -26,13 +30,18 @@ class DataSetForm extends Component
 
     public $rules = [];
 
-    public function mount(){
+    public function mount(DataSet $dataSet=null){
         $this->rules = DataSet::$rules;
-        $dataSet = DataSet::make();
-        $this->status = $dataSet->status;
-        $this->interval = $dataSet->interval;
-        $this->mya_deployment = $dataSet->mya_deployment;
+
+        if ($dataSet){
+            $this->data_set_id = $dataSet->id;
+        }else{
+            $dataSet = DataSet::make();
+        }
+        $this->fill($dataSet->getAttributes());
+
         $this->existingConfigs = DataSetConfig::all()->sortBy('id')->pluck('name','id');
+
     }
 
     public function render()
@@ -42,11 +51,21 @@ class DataSetForm extends Component
 
     public function save()
     {
-        $this->validate();
-        DataSet::create(
-            $this->all()
-        );
+        $this->validate(DataSet::$rules);
 
-        $this->redirect('/data-sets');
+        if ($this->data_set_id){
+            $dataSet = DataSet::find($this->data_set_id);
+            $this->authorize('edit-data-set', $dataSet);
+        }else{
+            $this->authorize('create-data-set');
+            $dataSet = DataSet::make();
+        }
+        $dataSet->fill($this->all());
+        if (! $dataSet->save()){
+           dd($dataSet->errors());
+        }
+
+        $this->redirect(route('data-sets.show', $dataSet->id));
+
     }
 }

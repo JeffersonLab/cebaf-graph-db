@@ -1,10 +1,18 @@
 <?php
+
+use App\Livewire\ConfigForm;
 use App\Models\Config as DataSetConfig;
 use App\Models\User;
 
-test('it renders create form', function () {
+test('it requires auth to retrieve create form', function () {
     $this->get(route('configs.create'))
-        ->assertSeeLivewire(\App\Livewire\ConfigForm::class)
+        ->assertForbidden();
+});
+
+test('it retrieves the create form', function () {
+    Livewire::actingAs(User::factory()->create());
+    $this->get(route('configs.create'))
+        ->assertSeeLivewire(ConfigForm::class)
         ->assertSee('name')
         ->assertSee('yaml')
         ->assertSee('comments');
@@ -15,7 +23,7 @@ test ('it requires authorization to create', function () {
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->make();
     // We haven't declared a user via actingAs here
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    $response = Livewire::test(ConfigForm::class)
         ->set('name', $config->name)
         ->set('yaml', $config->yaml)
         ->set('comments', $config->comments)
@@ -29,7 +37,7 @@ test('it stores a new config', function () {
 
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->make();    // make() doesn't save anything to DB!
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    Livewire::test(ConfigForm::class)
         ->set('name', $config->name)
         ->set('yaml', $config->yaml)
         ->set('comments', $config->comments)
@@ -43,7 +51,7 @@ test('it stores a new config', function () {
 test('it requires name field', function () {
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->make();    // make() doesn't save anything to DB!
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    $response = Livewire::test(ConfigForm::class)
         ->set('name', null)
         ->set('yaml', $config->yaml)
         ->set('comments', $config->comments)
@@ -54,7 +62,7 @@ test('it requires name field', function () {
 test('it requires yaml field', function () {
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->make();    // make() doesn't save anything to DB!
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    $response = Livewire::test(ConfigForm::class)
         ->set('name', $config->name)
         ->set('yaml', null)
         ->set('comments', $config->comments)
@@ -65,7 +73,7 @@ test('it requires yaml field', function () {
 test('it syntax checks yaml field', function () {
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->make();    // make() doesn't save anything to DB!
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    $response = Livewire::test(ConfigForm::class)
         ->set('name', $config->name)
         ->set('yaml', 'text that is not yaml')
         ->set('comments', $config->comments)
@@ -78,7 +86,7 @@ test ('it requires authorization to update', function () {
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->create();
     // We haven't declared a user via actingAs here
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    $response = Livewire::test(ConfigForm::class)
         ->set('config_id', $config->id)
         ->set('name', $config->name . '_modified')
         ->set('yaml', $config->yaml)
@@ -93,7 +101,7 @@ test('it updates an existing config', function () {
 
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->create();    // make() doesn't save anything to DB!
-    $response = Livewire::test(\App\Livewire\ConfigForm::class)
+    $response = Livewire::test(ConfigForm::class)
         ->set('config_id', $config->id)
         ->set('name', $config->name . '_modified')
         ->set('yaml', $config->yaml)

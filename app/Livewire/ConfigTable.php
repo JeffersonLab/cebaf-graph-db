@@ -12,7 +12,9 @@ class ConfigTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id')
+            ->setPerPageVisibilityDisabled()
+            ->setSearchDisabled();
     }
 
     public function columns(): array

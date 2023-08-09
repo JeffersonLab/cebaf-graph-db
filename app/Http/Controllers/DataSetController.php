@@ -30,20 +30,10 @@ class DataSetController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('create-data-set');
         return view('data_sets.create')->with('dataSet',DataSet::make());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreDataSetRequest $request): RedirectResponse
-    {
-        $dataSet = DataSet::make($request->all());
-        if ($dataSet->save()){
-            return to_route('data-sets.show', ['data_set' => $dataSet]);
-        }
-        return to_route('data-sets.create')->withErrors(['form' => 'Unable to save form.']);
-    }
 
     /**
      * Display the specified resource.
@@ -56,11 +46,11 @@ class DataSetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function edit(DataSet $dataSet)
+    public function edit(DataSet $dataSet): View
     {
-        //
+        $this->authorize('edit-data-set', $dataSet);
+        return view('data_sets.edit')->with('dataSet',$dataSet);
     }
 
     /**

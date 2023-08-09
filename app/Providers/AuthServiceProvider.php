@@ -4,7 +4,9 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Config;
+use App\Models\DataSet;
 use App\Policies\ConfigPolicy;
+use App\Policies\DataSetPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Config::class => ConfigPolicy::class,
+        DataSet::class => DataSetPolicy::class,
     ];
 
     /**
@@ -30,5 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         // in our Components.
         Gate::define('edit-config', [ConfigPolicy::class, 'update']);
         Gate::define('create-config', [ConfigPolicy::class, 'create']);
+        Gate::define('edit-data-set', [DataSetPolicy::class, 'update']);
+        Gate::define('create-data-set', [DataSetPolicy::class, 'create']);
     }
 }

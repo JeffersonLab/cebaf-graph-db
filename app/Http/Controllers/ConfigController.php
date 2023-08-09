@@ -19,6 +19,7 @@ class ConfigController extends Controller
 
     public function create()
     {
+        $this->authorize('create-config');
         return view('configs.create')->with('config',Config::make());
     }
 
@@ -28,11 +29,12 @@ class ConfigController extends Controller
 
     public function show(Config $config)
     {
-        return view('configs.show')->with('configs',$config);
+        return view('configs.show')->with('config',$config);
     }
 
     public function edit(Config $config)
     {
+        $this->authorize('edit-config', $config);
         return view('configs.edit')->with('config',$config);
     }
 

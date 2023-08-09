@@ -13,9 +13,11 @@ class DataSetTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setTableRowUrl(function($row) {
+            ->setTableRowUrl(function ($row) {
                 return route('data-sets.show', $row);
-            });
+            })
+            ->setPerPageVisibilityDisabled()
+            ->setSearchDisabled();
     }
 
     public function columns(): array
