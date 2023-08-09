@@ -18,17 +18,6 @@ afterEach(function () {
 });
 
 
-/**
- * see https://pestphp.com/docs/custom-helpers
- * @return TestCase
- */
-function asAuthenticatedUser(): TestCase
-{
-    $user = User::factory()->create();
-    return test()->actingAs($user);
-}
-
-
 test('it redirects home page to data-sets', function () {
     /** @var TestResponse $response */
     $response = $this->get('/');
@@ -39,11 +28,15 @@ test('it redirects home page to data-sets', function () {
 test('it renders create form', function () {
     Livewire::test(\App\Livewire\DataSetForm::class)
         ->assertStatus(200);
-    $this->get('/data-sets/create')
+    $this->get(route('data-sets.create'))
         ->assertSeeLivewire(\App\Livewire\DataSetForm::class)
+        ->assertSee('name')
         ->assertSee('status')
+        ->assertSee('begin_at')
+        ->assertSee('end_at')
         ->assertSee('mya_deployment')
-        ->assertSee('interval');
+        ->assertSee('interval')
+        ->assertSee('comments');
 });
 
 test('it stores a new data set', function () {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -42,7 +43,12 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * see https://pestphp.com/docs/custom-helpers
+ * @return TestCase
+ */
+function asAuthenticatedUser(): TestCase
 {
-    // ..
+    $user = User::factory()->create();
+    return test()->actingAs($user);
 }

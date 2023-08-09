@@ -33,6 +33,7 @@ class ConfigController extends Controller
 
     public function edit(Config $config)
     {
+        return view('configs.edit')->with('config',$config);
     }
 
     public function update(Request $request, Config $config)

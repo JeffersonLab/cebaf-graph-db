@@ -46,7 +46,7 @@ class Config extends BaseModel
         $rules['yaml'] = Arr::wrap($rules['yaml']);
         // Create a custom closure-based validation rule to sanity check that what is about to
         // be stored in the yaml column is plausibly valid.
-        $rules['yaml'][] = function (string $attribute, mixed $value, Closure $fail) {
+        $rules['yaml']['syntax'] = function (string $attribute, mixed $value, Closure $fail) {
             $parsed = yaml_parse($value);
             if (! is_array($parsed)) {
                 $fail("The {$attribute} formatting is not valid.");

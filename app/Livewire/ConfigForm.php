@@ -3,20 +3,35 @@
 namespace App\Livewire;
 
 use App\Models\Config;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class ConfigForm extends Component
 {
 
+    use AuthorizesRequests;
+
+    /**
+     * @var Config
+     */
+    public $config_id;  // plain $id is reserved by livewire
     public $name;
-    public $comments;
     public $yaml;
+    public $comments;
 
-    public $rules = [];
+    public $config;
 
-    public function mount()
+    public function mount(Config $config=null)
     {
-        $this->rules = Config::$rules;
+        if ($config){
+            $this->fill($config->getAttributes());
+            $this->config_id = $config->id;
+            $this->config = $config;
+        }else{
+            $this->config = Config::make();
+        }
     }
 
     public function render()
@@ -31,10 +46,20 @@ class ConfigForm extends Component
         // the rules property which livewire sends to client as json.
         $rules = (Config::make())->rules();
         $this->validate($rules);
-        Config::create(
-            $this->all()
-        );
 
-        $this->redirect('/configs');
+        // Update existing config
+        if ($this->config_id){
+            $config = Config::find($this->config_id);
+            $this->authorize('edit-config', $config);
+            $config->fill($this->all());
+        }else{
+            $this->authorize('create-config');
+            $config = Config::create($this->all());
+        }
+        if (! $config->save()){
+            throw new ValidationException('Failed to save configuration');
+        }
+
+        $this->redirect(route('configs.index'));
     }
 }
