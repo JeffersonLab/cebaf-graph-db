@@ -42,16 +42,16 @@ class DataSetLoader
      *
      * @throws \Throwable
      */
-    public function store(string $name = null, string $comment = null, $label = null): DataSet
+    public function store(?string $name = null, ?string $comment = null, $label = null): DataSet
     {
         $dataSet = new DataSet([
             'name' => $name ?: $this->configFile(),
             'comments' => $comment,
-            'begin_at' => '2021-09-05'
+            'begin_at' => '2021-09-05',
         ]);
         $dataSet->config()->associate(Config::create([
             'name' => $this->configFile(),
-            'yaml' => file_get_contents($this->configFile())
+            'yaml' => file_get_contents($this->configFile()),
         ]));
         DB::beginTransaction();
         try {

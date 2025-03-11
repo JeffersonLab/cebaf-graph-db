@@ -18,7 +18,7 @@ test('it retrieves the create form', function () {
         ->assertSee('comments');
 });
 
-test ('it requires authorization to create', function () {
+test('it requires authorization to create', function () {
 
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->make();
@@ -81,14 +81,14 @@ test('it syntax checks yaml field', function () {
     $response->assertHasErrors(['yaml']);
 });
 
-test ('it requires authorization to update', function () {
+test('it requires authorization to update', function () {
 
     // Use factory to get some valid sample data
     $config = DataSetConfig::factory()->create();
     // We haven't declared a user via actingAs here
     $response = Livewire::test(ConfigForm::class)
         ->set('config_id', $config->id)
-        ->set('name', $config->name . '_modified')
+        ->set('name', $config->name.'_modified')
         ->set('yaml', $config->yaml)
         ->set('comments', $config->comments)
         ->call('save')
@@ -103,12 +103,12 @@ test('it updates an existing config', function () {
     $config = DataSetConfig::factory()->create();    // make() doesn't save anything to DB!
     $response = Livewire::test(ConfigForm::class)
         ->set('config_id', $config->id)
-        ->set('name', $config->name . '_modified')
+        ->set('name', $config->name.'_modified')
         ->set('yaml', $config->yaml)
         ->set('comments', $config->comments)
         ->call('save')
         ->assertRedirect(route('configs.index'));
 
     // Check database for our new creation
-    $this->assertTrue(DataSetConfig::whereName($config->name . '_modified')->exists());
+    $this->assertTrue(DataSetConfig::whereName($config->name.'_modified')->exists());
 });

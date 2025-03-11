@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Config;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Config;
 
 class ConfigTable extends DataTableComponent
 {
@@ -20,13 +20,13 @@ class ConfigTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make("Name", "name")
+            Column::make('Name', 'name')
                 ->sortable(),
-            Column::make("Created", "created_at")
+            Column::make('Created', 'created_at')
                 ->sortable(),
-            Column::make("Updated", "updated_at")
+            Column::make('Updated', 'updated_at')
                 ->sortable(),
         ];
     }

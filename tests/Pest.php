@@ -45,10 +45,10 @@ expect()->extend('toBeOne', function () {
 
 /**
  * see https://pestphp.com/docs/custom-helpers
- * @return TestCase
  */
 function asAuthenticatedUser(): TestCase
 {
     $user = User::factory()->create();
+
     return test()->actingAs($user);
 }

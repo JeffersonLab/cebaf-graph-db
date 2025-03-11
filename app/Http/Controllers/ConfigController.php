@@ -14,35 +14,31 @@ class ConfigController extends Controller
     public function index(Request $request): View
     {
 
-        return view('configs.index')->with('configs',Config::cursor());
+        return view('configs.index')->with('configs', Config::cursor());
     }
 
     public function create()
     {
         $this->authorize('create-config');
-        return view('configs.create')->with('config',Config::make());
+
+        return view('configs.create')->with('config', Config::make());
     }
 
-    public function store(Request $request)
-    {
-    }
+    public function store(Request $request) {}
 
     public function show(Config $config)
     {
-        return view('configs.show')->with('config',$config);
+        return view('configs.show')->with('config', $config);
     }
 
     public function edit(Config $config)
     {
         $this->authorize('edit-config', $config);
-        return view('configs.edit')->with('config',$config);
+
+        return view('configs.edit')->with('config', $config);
     }
 
-    public function update(Request $request, Config $config)
-    {
-    }
+    public function update(Request $request, Config $config) {}
 
-    public function destroy(Config $config)
-    {
-    }
+    public function destroy(Config $config) {}
 }

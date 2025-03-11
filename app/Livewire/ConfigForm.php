@@ -4,32 +4,33 @@ namespace App\Livewire;
 
 use App\Models\Config;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class ConfigForm extends Component
 {
-
     use AuthorizesRequests;
 
     /**
      * @var Config
      */
     public $config_id;  // plain $id is reserved by livewire
+
     public $name;
+
     public $yaml;
+
     public $comments;
 
     public $config;
 
-    public function mount(Config $config=null)
+    public function mount(?Config $config = null)
     {
-        if ($config){
+        if ($config) {
             $this->fill($config->getAttributes());
             $this->config_id = $config->id;
             $this->config = $config;
-        }else{
+        } else {
             $this->config = Config::make();
         }
     }
@@ -48,15 +49,15 @@ class ConfigForm extends Component
         $this->validate($rules);
 
         // Update existing config
-        if ($this->config_id){
+        if ($this->config_id) {
             $config = Config::find($this->config_id);
             $this->authorize('edit-config', $config);
             $config->fill($this->all());
-        }else{
+        } else {
             $this->authorize('create-config');
             $config = Config::create($this->all());
         }
-        if (! $config->save()){
+        if (! $config->save()) {
             throw new ValidationException('Failed to save configuration');
         }
 

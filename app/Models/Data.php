@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Data extends Model
 {
-    //TODO save graph and globals to correctly named files
+    // TODO save graph and globals to correctly named files
     use HasFactory;
 
     public $timestamps = false;
