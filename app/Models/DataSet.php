@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Exceptions\StorageException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Jlab\LaravelUtilities\BaseModel;
@@ -11,7 +12,7 @@ use ZipArchive;
 
 class DataSet extends BaseModel
 {
-    //TODO create a zip file containing data items
+    // TODO create a zip file containing data items
     use HasFactory;
 
     public $guarded = ['id'];
@@ -27,11 +28,6 @@ class DataSet extends BaseModel
         'mya_deployment' => 'history',
     ];
 
-    protected $casts = [
-        'begin_at' => 'date',
-        'end_at' => 'date',
-    ];
-
     public static $rules = [
         'config_id' => ['required', 'exists:configs,id'],
         'name' => 'required|max:100',
@@ -43,7 +39,15 @@ class DataSet extends BaseModel
         'interval' => 'required',
     ];
 
-    public function data()
+    protected function casts(): array
+    {
+        return [
+            'begin_at' => 'date',
+            'end_at' => 'date',
+        ];
+    }
+
+    public function data(): HasMany
     {
         return $this->hasMany(Data::class);
     }
@@ -87,7 +91,7 @@ class DataSet extends BaseModel
     {
         // Do an export to disk storage
         $this->exportToStorage();
-        $zipArchive = new ZipArchive();
+        $zipArchive = new ZipArchive;
         if ($zipArchive->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
             throw new StorageException("Unable to write zip file.  Verify path and file permissions are correct.\n");
         }
@@ -105,7 +109,7 @@ class DataSet extends BaseModel
      */
     public function makeZipFileFromCollection(string $file, Collection $data): string
     {
-        $zipArchive = new ZipArchive();
+        $zipArchive = new ZipArchive;
         if ($zipArchive->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
             throw new StorageException("Unable to write zip file.  Verify path and file permissions are correct.\n");
         }

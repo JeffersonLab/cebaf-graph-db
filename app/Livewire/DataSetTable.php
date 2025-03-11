@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\DataSet;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\DataSet;
 
 class DataSetTable extends DataTableComponent
 {
@@ -23,13 +23,13 @@ class DataSetTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make("Name", "name")
+            Column::make('Name', 'name')
                 ->sortable(),
-            Column::make("Created", "created_at")
+            Column::make('Created', 'created_at')
                 ->sortable(),
-            Column::make("Updated", "updated_at")
+            Column::make('Updated', 'updated_at')
                 ->sortable(),
         ];
     }

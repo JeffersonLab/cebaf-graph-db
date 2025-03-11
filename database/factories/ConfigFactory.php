@@ -19,7 +19,7 @@ class ConfigFactory extends Factory
         return [
             'name' => $this->faker->text(40),
             'yaml' => $this->yaml(),
-            'comments' => $this->faker->text()
+            'comments' => $this->faker->text(),
         ];
     }
 

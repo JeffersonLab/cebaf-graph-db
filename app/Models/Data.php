@@ -4,23 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 class Data extends Model
 {
-    //TODO save graph and globals to correctly named files
+    // TODO save graph and globals to correctly named files
     use HasFactory;
 
     public $timestamps = false;
 
     public $fillable = ['timestamp', 'data_set_id', 'label', 'graph', 'globals'];
 
-    protected $casts = [
-        'timestamp' => 'datetime',
-        'globals' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'timestamp' => 'datetime',
+            'globals' => 'array',
+        ];
+    }
 
-    public function dataSet()
+    public function dataSet(): BelongsTo
     {
         return $this->belongsTo(DataSet::class);
     }

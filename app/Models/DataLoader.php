@@ -49,7 +49,7 @@ class DataLoader
     /**
      * @throws \Throwable
      */
-    public function store(string $label = null): Data
+    public function store(?string $label = null): Data
     {
         try {
             $data = new Data(['data_set_id' => $this->dataSet->id, 'label' => $label]);
@@ -70,7 +70,7 @@ class DataLoader
     /**
      * @throws \Throwable
      */
-    public function replace(string $label = null): Data
+    public function replace(?string $label = null): Data
     {
         DB::beginTransaction();
         try {

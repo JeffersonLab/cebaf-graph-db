@@ -1,14 +1,11 @@
 <?php
 
 use App\Livewire\DataSetForm;
-use App\Models\User;
-use \App\Models\DataSet;
-use Livewire\Livewire;
-use Illuminate\Testing\TestResponse;
 use App\Models\Config as DataSetConfig;
-use Tests\TestCase;
-
-
+use App\Models\DataSet;
+use App\Models\User;
+use Illuminate\Testing\TestResponse;
+use Livewire\Livewire;
 
 beforeEach(function () {
     // Some code...
@@ -17,7 +14,6 @@ beforeEach(function () {
 afterEach(function () {
     // Some code...
 });
-
 
 test('it redirects home page to data-sets', function () {
     /** @var TestResponse $response */
@@ -47,13 +43,13 @@ test('it renders create form', function () {
 });
 
 test('it stores a new data set', function () {
-    //prepare form data
+    // prepare form data
     $config = DataSetConfig::factory()->create();
     $dataSet = DataSet::factory()->make();
 
     Livewire::actingAs(User::factory()->create());
     $response = Livewire::test(DataSetForm::class)
-        ->set($dataSet->only(['name','status', 'label', 'begin_at', 'interval', 'mya_deployment']))
+        ->set($dataSet->only(['name', 'status', 'label', 'begin_at', 'interval', 'mya_deployment']))
         ->set('config_id', $config->id)
         ->call('save')
         ->assertStatus(200);
@@ -63,9 +59,8 @@ test('it stores a new data set', function () {
     $newId = DataSet::first('id');
 
     // Check the resulting redirect
-   $response->assertRedirect(route('data-sets.show',[$newId]));
+    $response->assertRedirect(route('data-sets.show', [$newId]));
 });
-
 
 test('it requires name field', function () {
     // Use factory to get some valid sample data
