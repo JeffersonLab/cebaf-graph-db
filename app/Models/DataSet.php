@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Exceptions\StorageException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Collection;
@@ -46,7 +47,7 @@ class DataSet extends BaseModel
         ];
     }
 
-    public function data()
+    public function data(): HasMany
     {
         return $this->hasMany(Data::class);
     }
