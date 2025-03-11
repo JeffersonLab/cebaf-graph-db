@@ -15,10 +15,13 @@ class Data extends Model
 
     public $fillable = ['timestamp', 'data_set_id', 'label', 'graph', 'globals'];
 
-    protected $casts = [
-        'timestamp' => 'datetime',
-        'globals' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'timestamp' => 'datetime',
+            'globals' => 'array',
+        ];
+    }
 
     public function dataSet()
     {

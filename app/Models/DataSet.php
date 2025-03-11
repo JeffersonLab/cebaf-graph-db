@@ -27,11 +27,6 @@ class DataSet extends BaseModel
         'mya_deployment' => 'history',
     ];
 
-    protected $casts = [
-        'begin_at' => 'date',
-        'end_at' => 'date',
-    ];
-
     public static $rules = [
         'config_id' => ['required', 'exists:configs,id'],
         'name' => 'required|max:100',
@@ -42,6 +37,14 @@ class DataSet extends BaseModel
         'end_at' => 'nullable | date',
         'interval' => 'required',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'begin_at' => 'date',
+            'end_at' => 'date',
+        ];
+    }
 
     public function data()
     {
